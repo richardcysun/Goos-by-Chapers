@@ -10,8 +10,9 @@ import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.ui.MainWindow;
 
-//Ch11, p.96, 99
+//Ch11, p.96, 99, 101
 public class Main {
+    @SuppressWarnings("unused") private Chat notTobeGCd;
     private MainWindow ui;
     
     private static final int ARG_HOSTNAME = 0;
@@ -29,18 +30,34 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         Main main = new Main();
-        XMPPConnection connection = connectTo(args[ARG_HOSTNAME],
-                args[ARG_USERNAME], args[ARG_PASSWORD]);
-        Chat chat = connection.getChatManager().createChat(auctionId(args[ARG_ITEM_ID], connection),
-                new MessageListener() {
-                    public void processMessage(Chat aChat, Message message) {
-                        //Nothing yet
-                    }
-        });
-        
-       chat.sendMessage(new Message());
+        main.joinAuction(connectTo(args[ARG_HOSTNAME],
+                args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
     }
 
+    private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException{
+        final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
+                new MessageListener() {
+                    public void processMessage(Chat aChat, Message message) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
+                                ui.showStaus(MainWindow.STATUS_LOST);                                        
+                            }
+                        });
+                    }
+                });
+        this.notTobeGCd = chat;
+        
+        //Turn on below 2.5 second delay so we may have chance the observe the Joining->Lost messages
+        /*
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace(); 
+        } */   
+        
+        chat.sendMessage(new Message());        
+    }
+    
     private static String auctionId(String itemId, XMPPConnection connection) {
         return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
