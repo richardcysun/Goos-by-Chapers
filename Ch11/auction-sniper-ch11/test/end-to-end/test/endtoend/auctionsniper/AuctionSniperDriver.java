@@ -11,6 +11,8 @@ import static org.hamcrest.Matchers.*;
 import auctionsniper.ui.MainWindow;
 
 //Ch11, p.91
+//extends means inherit
+//super is a bit similar to this, but it can call father class interface 
 public class AuctionSniperDriver extends JFrameDriver{
 
     public AuctionSniperDriver(int timeoutMillis) {

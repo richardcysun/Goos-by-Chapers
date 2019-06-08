@@ -10,9 +10,15 @@ public class AuctionSniperEndToEndTest {
 
     @Test public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {
         auction.startSellingItem();                 //Step 1
+        
+        //If the UI doesn't show "Joining", throw exception i think
         application.startBiddingIn(auction);        //Step 2
+        
+        //If fake auction server doesn't receive any message in 5 seconds, assert!
         auction.hasReceivedJoinRequestFromSniper(); //Step 3
         auction.announceClosed();                   //Step 4
+        
+        //If the UI doesn't show "Lost", throw exception i think
         application.showSniperHasLostAuction();     //Step 5
     }
     

@@ -16,6 +16,7 @@ public class ApplicationRunner {
         Thread thread = new Thread("Test Application") {
         @Override public void run() {
             try {
+                //Application Runner drives Main of production codes
                 Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
             }//try
             catch (Exception e) {
@@ -26,10 +27,12 @@ public class ApplicationRunner {
     thread.setDaemon(true);
     thread.start();
     driver = new AuctionSniperDriver(1000);
+    //if the "Joining" is appeared on UI
     driver.showsSniperStatus(MainWindow.STATUS_JOINING);
     }
 
     public void showSniperHasLostAuction() {
+        //if the "Lost" is appeared on UI
         driver.showsSniperStatus(MainWindow.STATUS_LOST);
     }
     

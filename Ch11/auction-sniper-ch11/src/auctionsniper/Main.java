@@ -30,7 +30,7 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         Main main = new Main();
-        main.joinAuction(connectTo(args[ARG_HOSTNAME],
+        main.joinAuction(connection(args[ARG_HOSTNAME],
                 args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
     }
 
@@ -40,6 +40,8 @@ public class Main {
                     public void processMessage(Chat aChat, Message message) {
                         SwingUtilities.invokeLater(new Runnable() {
                             public void run() {
+                                //The Fake Auction Server put a empty message by announceClosed() in Chat,
+                                //after Main has received the empty one, it put "Lost" on UI
                                 ui.showStaus(MainWindow.STATUS_LOST);                                        
                             }
                         });
@@ -47,13 +49,13 @@ public class Main {
                 });
         this.notTobeGCd = chat;
         
-        //Turn on below 2.5 second delay so we may have chance the observe the Joining->Lost messages
+        //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
         /*
         try {
-            Thread.sleep(2500);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace(); 
-        } */   
+        } */    
         
         chat.sendMessage(new Message());        
     }
@@ -62,8 +64,7 @@ public class Main {
         return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
 
-    private static XMPPConnection connectTo(String hostname, String username, String password) throws XMPPException{
-        // TODO Auto-generated method stub
+    private static XMPPConnection connection(String hostname, String username, String password) throws XMPPException{
         XMPPConnection connection = new XMPPConnection(hostname);
         connection.connect();
         connection.login(username, password, AUCTION_RESOURCE);
