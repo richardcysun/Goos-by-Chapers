@@ -6,6 +6,9 @@ import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Message;
 
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
+
 //Ch11, p.93, p.94
 public class FakeAuctionServer {
     private final SingleMessageListener messageListener = new SingleMessageListener();
@@ -38,8 +41,9 @@ public class FakeAuctionServer {
         });
     }
     
+    //Ch12, p.107, revise Ch11
     public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
-        messageListener.receiveAMessage();
+        messageListener.receiveAMessage(is(anything()));
     }
 
     public void announceClosed() throws XMPPException {
@@ -54,4 +58,18 @@ public class FakeAuctionServer {
     public void stop() {
         connection.disconnect();
     }
+
+    //Ch12, p.107
+	public void reportPrice(int price, int increment, String bidder) throws XMPPException {
+		currentChat.sendMessage(String.format("SOLVersion: 1.1; Event: PRICE "
+				+ "CurrentPrice: %d; Increment: %d; Bidder: %s;",
+				price, increment, bidder));
+	}
+	
+	//Ch12, p.107
+	public void hasReceivedBid(int bid, String sniperId) throws InterruptedException {
+		assertThat(currentChat.getParticipant(), equalTo(sniperId));
+		messageListener.receiveAMessage(equalTo(String.format("SQLVersion: 1.1; Command: BID; Price: %d;", bid)));
+	}
+
 }
