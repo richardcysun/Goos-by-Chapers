@@ -8,3 +8,15 @@ Pleaes be noticed that this repository is a kind a personal study note. In addit
 ## Chapter 11
 In this chapter, there is a tricky part confuses me a while. How come the FakeAuctionServer announces auction close by sending empty message in Chat?
 While Main receiving a message (empty or not, no matter) from Chat, it always put "Lost" on the Label. The actual implements will be filled in following chapters. 
+
+## Chapter 12
+It seems some constants are not explicitly mentions in the Java examples. Here are some of them.
+
+```java
+// ApplicationRunner.java
+public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
+
+// Main.java
+public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
+public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
+```
