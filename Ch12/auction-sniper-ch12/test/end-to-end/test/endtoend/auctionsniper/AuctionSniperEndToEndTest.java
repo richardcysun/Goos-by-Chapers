@@ -26,7 +26,9 @@ public class AuctionSniperEndToEndTest {
     @Test public void sniperMakesAHigherBidButLoes() throws Exception {
     	auction.startSellingItem();                 //Step 1
     	application.startBiddingIn(auction);        //Step 2
-    	auction.hasReceivedJoinRequestFromSniper(); //Step 3
+
+    	//Ch12, p.109, revise Ch12, p.106
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID); //Step 3
     	
     	auction.reportPrice(1000, 98, "other bidder");	//Step 4
     	application.hasShownSniperIsBidding();		//Step 5
