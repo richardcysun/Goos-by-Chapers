@@ -6,10 +6,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
 import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.ui.MainWindow;
 
