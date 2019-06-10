@@ -20,6 +20,8 @@ public class SingleMessageListener implements MessageListener {
     }
     
     public void receiveAMessage() throws InterruptedException {
+    	//If message is not coming in 5 seconds, exception
+    	//If message is null (empty message is not null), assert
         assertThat("Message", messages.poll(5, TimeUnit.SECONDS), is(notNullValue()));
     }
 }

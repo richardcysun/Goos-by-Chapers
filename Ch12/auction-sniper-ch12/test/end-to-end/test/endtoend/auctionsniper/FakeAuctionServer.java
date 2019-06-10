@@ -31,11 +31,13 @@ public class FakeAuctionServer {
         this.connection = new XMPPConnection(XMPP_HOSTNAME);
     }
 
+    //Log in to OpenFire as "auction-item-54321" and open a Chat, and pretend it's Southabee On-line
     public void startSellingItem() throws XMPPException {
         connection.connect();
         //The ITEM_ID_AS_LOGIN will be "auction-item-54321"
         connection.login(String.format(ITEM_ID_AS_LOGIN, itemId),
                 AUCTION_PASSWORD, AUCTION_RESOURCE);
+        //ChatManagerListener is a class to talk with OpenFire XMPP Server
         connection.getChatManager().addChatListener(new ChatManagerListener() {
             public void chatCreated(Chat chat, boolean createdLocally) {
                 currentChat = chat;
@@ -63,7 +65,7 @@ public class FakeAuctionServer {
 
 	public void announceClosed() throws XMPPException {
         //In Ch11, this is just a empty message, but in Ch12, "CLOSE" event is set  
-        currentChat.sendMessage("SQLVersion: 1.1; Event: CLOSE;");
+        currentChat.sendMessage("SOLVersion: 1.1; Event: CLOSE;");
     }
 
     public String getItemId() {

@@ -14,6 +14,7 @@ public class ApplicationRunner {
 
     private AuctionSniperDriver driver;
 
+    //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer auction) {
         Thread thread = new Thread("Test Application") {
         @Override public void run() {
@@ -28,8 +29,10 @@ public class ApplicationRunner {
     };//thread
     thread.setDaemon(true);
     thread.start();
+    
+    //Check WindowLicker swing queue every seconds
     driver = new AuctionSniperDriver(1000);
-    //if the "Joining" is appeared on UI
+    //if the "Joining" is appeared on Main's UI
     driver.showsSniperStatus(MainWindow.STATUS_JOINING);
     }
 

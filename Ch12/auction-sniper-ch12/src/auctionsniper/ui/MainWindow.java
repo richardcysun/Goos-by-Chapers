@@ -19,6 +19,7 @@ public class MainWindow extends JFrame{
     public MainWindow() {
         super("Auction Sniper");
         setName(MAIN_WINDOW_NAME);
+        //It show "Joining" by default
         add(sniperStatus);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

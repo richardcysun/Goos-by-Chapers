@@ -40,6 +40,7 @@ public class Main implements AuctionEventListener {
     }
 
     //Ch12, p.117 revise Ch11
+    //Login as "sniper/sniper" and join "auction-item-54321" chat    
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
     	disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
@@ -70,6 +71,7 @@ public class Main implements AuctionEventListener {
         return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
 
+	//Login as "sniper/sniper"
     private static XMPPConnection connection(String hostname, String username, String password) throws XMPPException{
         XMPPConnection connection = new XMPPConnection(hostname);
         connection.connect();

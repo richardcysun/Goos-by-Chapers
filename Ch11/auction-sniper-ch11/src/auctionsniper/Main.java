@@ -34,6 +34,7 @@ public class Main {
                 args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
     }
 
+    //Login as "sniper/sniper" and join "auction-item-54321" chat
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException{
         final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
                 new MessageListener() {
@@ -41,7 +42,7 @@ public class Main {
                         SwingUtilities.invokeLater(new Runnable() {
                             public void run() {
                                 //The Fake Auction Server put a empty message by announceClosed() in Chat,
-                                //after Main has received the empty one, it put "Lost" on UI
+                                //after Main has received this empty message in Chat, it put "Lost" on UI
                                 ui.showStaus(MainWindow.STATUS_LOST);                                        
                             }
                         });
@@ -50,13 +51,14 @@ public class Main {
         this.notTobeGCd = chat;
         
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
-        /*
+        
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace(); 
-        } */    
+        }     
         
+        //Send a empty message to Chat
         chat.sendMessage(new Message());        
     }
     
@@ -64,6 +66,7 @@ public class Main {
         return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
     }
 
+    //Login as "sniper/sniper"
     private static XMPPConnection connection(String hostname, String username, String password) throws XMPPException{
         XMPPConnection connection = new XMPPConnection(hostname);
         connection.connect();
