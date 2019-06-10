@@ -3,11 +3,11 @@ package test.endtoend.auctionsniper;
 import org.junit.After;
 import org.junit.Test;
 
-//Ch10, p.85
 public class AuctionSniperEndToEndTest {
     private final FakeAuctionServer auction = new FakeAuctionServer("item-54321");
     private final ApplicationRunner application = new ApplicationRunner();
 
+  //Ch10, p.85
     @Test public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {
         auction.startSellingItem();                 //Step 1
         
@@ -31,6 +31,8 @@ public class AuctionSniperEndToEndTest {
         auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID); //Step 3
     	
     	auction.reportPrice(1000, 98, "other bidder");	//Step 4
+    	
+    	//In Ch12, the Main is not bidding, the test fails here
     	application.hasShownSniperIsBidding();		//Step 5
     	
     	auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);	//Step 6

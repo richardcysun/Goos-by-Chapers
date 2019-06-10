@@ -46,19 +46,19 @@ public class FakeAuctionServer {
         });
     }
     
-  //Ch12, p.108 revise Ch11
+    //Ch11, p.194, sniperJoinsAuctionUntilAuctionCloses() need this method
     public void hasReceivedJoinRequestFromSniper() throws InterruptedException {
         messageListener.receiveAMessage(is(anything()));
     }
     
-    //Ch12, p.108 revise Ch11 and Ch12 p.107
+    //Ch12 p.107, receive JOIN from "sniper@localhost/Auction"
     public void hasReceivedJoinRequestFrom(String sniperId) throws InterruptedException {
         receiveAMessageMatching(sniperId, equalTo(Main.JOIN_COMMAND_FORMAT));
     }
 
     //Ch12, p. 108
+    //This is a multiple-user system, auction server has to confirm message is from expected user
     private void receiveAMessageMatching(String sniperId, Matcher<? super String> messageMatcher) throws InterruptedException {
-		// TODO Auto-generated method stub
     	messageListener.receiveAMessage(messageMatcher);
     	assertThat(currentChat.getParticipant(), equalTo(sniperId));
 	}
@@ -76,7 +76,7 @@ public class FakeAuctionServer {
         connection.disconnect();
     }
 
-    //Ch12, p.107
+    //Ch12, p.107, send price to Chat
 	public void reportPrice(int price, int increment, String bidder) throws XMPPException {
 		currentChat.sendMessage(String.format("SOLVersion: 1.1; Event: PRICE "
 				+ "CurrentPrice: %d; Increment: %d; Bidder: %s;",
