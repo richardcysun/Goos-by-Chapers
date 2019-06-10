@@ -1,8 +1,6 @@
 package auctionsniper.ui;
 
 import java.awt.Color;
-import java.util.concurrent.TimeUnit;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;

@@ -13,8 +13,8 @@ import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.ui.MainWindow;
 
-//Ch11, p.96, 99, 101
-public class Main {
+//Ch12, p.117 revise Ch11
+public class Main implements AuctionEventListener {
     @SuppressWarnings("unused") private Chat notTobeGCd;
     private MainWindow ui;
     
@@ -39,32 +39,23 @@ public class Main {
                 args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
     }
 
+    //Ch12, p.117 revise Ch11
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
     	disconnectWhenUICloses(connection);
-        final Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new MessageListener() {
-                    public void processMessage(Chat aChat, Message message) {
-                        SwingUtilities.invokeLater(new Runnable() {
-                            public void run() {
-                                //The Fake Auction Server put a empty message by announceClosed() in Chat,
-                                //after Main has received the empty one, it put "Lost" on UI
-                                ui.showStaus(MainWindow.STATUS_LOST);                                        
-                            }
-                        });
-                    }
-                });
-        this.notTobeGCd = chat;
+        Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
+                new AuctionMessageTranslator(this));
         
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
-        /*
+        
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace(); 
-        } */    
+        }     
         
         //Ch12, p.110 revise Ch11
-        chat.sendMessage(JOIN_COMMAND_FORMAT);        
+        chat.sendMessage(JOIN_COMMAND_FORMAT);
+        this.notTobeGCd = chat;
     }
     
     private void disconnectWhenUICloses(final XMPPConnection connection) {
@@ -92,5 +83,19 @@ public class Main {
                 ui = new MainWindow();
             }
         });
+    }
+    
+    //Ch12, 0.117
+    public void auctionClosed() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ui.showStaus(MainWindow.STATUS_LOST);
+            }
+        });
+    }
+    
+    //Add a null method for now to make application worked
+    public void currentPrice(int price, int increment) {
+        
     }
 }

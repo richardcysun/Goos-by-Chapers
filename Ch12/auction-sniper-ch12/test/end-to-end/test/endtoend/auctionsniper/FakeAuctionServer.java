@@ -62,8 +62,8 @@ public class FakeAuctionServer {
 	}
 
 	public void announceClosed() throws XMPPException {
-        //Actually, this is just a empty message, 
-        currentChat.sendMessage(new Message());
+        //In Ch11, this is just a empty message, but in Ch12, "CLOSE" event is set  
+        currentChat.sendMessage("SQLVersion: 1.1; Event: CLOSE;");
     }
 
     public String getItemId() {
