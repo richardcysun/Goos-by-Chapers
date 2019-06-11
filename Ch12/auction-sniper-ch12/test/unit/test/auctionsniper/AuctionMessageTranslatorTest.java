@@ -18,11 +18,13 @@ public class AuctionMessageTranslatorTest {
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
     private final AuctionMessageTranslator translator = new AuctionMessageTranslator(listener);
     
-    public static final Chat UNUSED_CHAT = null;
+    public static final Chat UNUSED_CHAT = null;//argument doesn't matter
     
+    //This Unit Test verifies whether AuctionMessageTranslator can parse CLOSE event correctly
     @Test public void notifiesAuctionClosedWhenCloseMessageReceived() {
         context.checking(new Expectations() {
             {
+            	//JMock method, the AuctionEventListener.auctionClosed() will be called once
                 oneOf(listener).auctionClosed();
         }
             

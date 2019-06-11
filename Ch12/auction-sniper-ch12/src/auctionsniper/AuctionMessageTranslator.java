@@ -11,17 +11,23 @@ public class AuctionMessageTranslator implements MessageListener {
     private final AuctionEventListener listener;
     
     public AuctionMessageTranslator(AuctionEventListener listener) {
+    	//the listener is actually the Main
         this.listener = listener;
     }
 
     public void processMessage(Chat chat, Message message) {
+    	//listener.auctionClosed() was added in P.116, but it broke the test of notifiesBidDetailWhenCurrentPriceMessageReceived(), 
+    	//so it was commented out and replaced with correct uses 
         //listener.auctionClosed();
         HashMap<String, String> event = unpackEventFrom(message);
         
         String type = event.get("Event");
         if ("CLOSE".equals(type) ) {
+        	//It causes Main to display "Lost"
             listener.auctionClosed();
         } else if ("PRICE".equals(type)) {
+        	
+        	//Main hasn't implemented  currentPrice
             listener.currentPrice(Integer.parseInt(event.get("CurrentPrice")), 
                     Integer.parseInt(event.get("Increment")));
         }
