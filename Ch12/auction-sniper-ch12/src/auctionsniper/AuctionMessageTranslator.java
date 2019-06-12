@@ -27,7 +27,7 @@ public class AuctionMessageTranslator implements MessageListener {
             listener.auctionClosed();
         } else if ("PRICE".equals(type)) {
         	
-        	//Main hasn't implemented  currentPrice
+        	//Main hasn't implemented currentPrice
             listener.currentPrice(Integer.parseInt(event.get("CurrentPrice")), 
                     Integer.parseInt(event.get("Increment")));
         }

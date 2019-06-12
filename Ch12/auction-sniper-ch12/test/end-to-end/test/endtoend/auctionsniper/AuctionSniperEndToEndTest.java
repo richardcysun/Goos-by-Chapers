@@ -23,7 +23,7 @@ public class AuctionSniperEndToEndTest {
     }
     
     //Ch12, p.106
-    @Test public void sniperMakesAHigherBidButLoes() throws Exception {
+    @Test public void sniperMakesAHigherBidButLoses() throws Exception {
     	auction.startSellingItem();                 //Step 1
     	application.startBiddingIn(auction);        //Step 2
 

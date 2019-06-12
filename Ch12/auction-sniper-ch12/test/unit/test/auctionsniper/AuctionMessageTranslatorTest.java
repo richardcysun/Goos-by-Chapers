@@ -30,6 +30,7 @@ public class AuctionMessageTranslatorTest {
             
         });
         
+        //If the form of CLOSE is correct, translator will call auctionClosed() of mock(AuctionEventListener)
         Message message = new Message();
         message.setBody("SOLVersion: 1.1; Event: CLOSE;");
         
@@ -42,6 +43,8 @@ public class AuctionMessageTranslatorTest {
                 exactly(1).of(listener).currentPrice(192, 7);
             }
         });
+        
+        //If the form of PRICE is correct, translator will call currentPrice() of mock(AuctionEventListener)
         Message message = new Message();
         message.setBody("SOLVersion: 1.1; Event: PRICE; CurrentPrice: 192; Increment: 7; Bidder: Someone else;");
         
