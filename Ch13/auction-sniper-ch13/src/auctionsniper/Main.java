@@ -11,8 +11,8 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.ui.MainWindow;
 
-//Ch12, p.117 revise Ch11
-public class Main implements AuctionEventListener {
+//Ch13, p.125 replace AuctionEventListener with SniperListener
+public class Main implements SniperListener {
     @SuppressWarnings("unused") private Chat notTobeGCd;
     private MainWindow ui;
     
@@ -42,7 +42,7 @@ public class Main implements AuctionEventListener {
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
     	disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new AuctionMessageTranslator(this));
+                new AuctionMessageTranslator(new AuctionSniper(this)));
         
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
         
@@ -85,7 +85,7 @@ public class Main implements AuctionEventListener {
         });
     }
     
-    //Ch12, 0.117
+    //Ch12, p.117
     public void auctionClosed() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -97,5 +97,14 @@ public class Main implements AuctionEventListener {
     //Add a null method for now to make application worked
     public void currentPrice(int price, int increment) {
         
+    }
+    
+    //Ch13, p.125
+    public void sniperLost() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ui.showStaus(MainWindow.STATUS_LOST);
+            }
+        });        
     }
 }

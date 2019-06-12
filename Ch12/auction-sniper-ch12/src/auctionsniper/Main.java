@@ -85,7 +85,7 @@ public class Main implements AuctionEventListener {
         });
     }
     
-    //Ch12, 0.117
+    //Ch12, p.117
     public void auctionClosed() {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
