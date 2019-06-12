@@ -37,17 +37,24 @@ public class Main implements SniperListener {
                 args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
     }
 
-    //Ch12, p.117 revise Ch11
+    //Ch13, p.130 revise entire function
     //Login as "sniper/sniper" and join "auction-item-54321" chat    
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
-        //Ch13, p.129
-        Auction nullAuction = new Auction() {
-            //Auction is an interface, we need to implement the body right here
-            public void bid(int amount) {}
-        };
     	disconnectWhenUICloses(connection);
-        Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new AuctionMessageTranslator(new AuctionSniper(nullAuction, this)));
+        Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), null);
+        this.notTobeGCd = chat;
+        
+        Auction auction = new Auction() {
+            //Auction is an interface, we need to implement the body right here
+            public void bid(int amount) {
+                try {
+                    chat.sendMessage(String.format(BID_COMMAND_FORMAT, amount));
+                }
+                catch(XMPPException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
         
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
         
@@ -57,9 +64,9 @@ public class Main implements SniperListener {
             e.printStackTrace(); 
         }     
         
+        chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction, this)));
         //Ch12, p.110 revise Ch11
         chat.sendMessage(JOIN_COMMAND_FORMAT);
-        this.notTobeGCd = chat;
     }
     
     private void disconnectWhenUICloses(final XMPPConnection connection) {
@@ -114,6 +121,10 @@ public class Main implements SniperListener {
     }
     
     public void sniperBidding() {
-        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                ui.showStaus(MainWindow.STATUS_BIDDING);
+            }
+        });          
     }
 }
