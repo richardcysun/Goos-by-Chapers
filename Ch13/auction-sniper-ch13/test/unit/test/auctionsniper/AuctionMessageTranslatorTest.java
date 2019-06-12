@@ -15,6 +15,7 @@ import auctionsniper.AuctionMessageTranslator;
 @RunWith(JMock.class)
 public class AuctionMessageTranslatorTest {
     private final Mockery context = new Mockery();
+    //AuctionEventListener is an interface, be noticed
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
     private final AuctionMessageTranslator translator = new AuctionMessageTranslator(listener);
     

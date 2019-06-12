@@ -40,9 +40,14 @@ public class Main implements SniperListener {
     //Ch12, p.117 revise Ch11
     //Login as "sniper/sniper" and join "auction-item-54321" chat    
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
+        //Ch13, p.129
+        Auction nullAuction = new Auction() {
+            //Auction is an interface, we need to implement the body right here
+            public void bid(int amount) {}
+        };
     	disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new AuctionMessageTranslator(new AuctionSniper(this)));
+                new AuctionMessageTranslator(new AuctionSniper(nullAuction, this)));
         
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
         
@@ -106,5 +111,9 @@ public class Main implements SniperListener {
                 ui.showStaus(MainWindow.STATUS_LOST);
             }
         });        
+    }
+    
+    public void sniperBidding() {
+        
     }
 }

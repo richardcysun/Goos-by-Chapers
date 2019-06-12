@@ -25,3 +25,4 @@ public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; 
 ```
 
 ## Chapter 13
+In this chapter, authors are going to create some interfaces to make unit test more easier.
