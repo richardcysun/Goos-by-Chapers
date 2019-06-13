@@ -12,6 +12,7 @@ While Main receiving a message (empty or not, no matter) from Chat, it always pu
 ## Chapter 12
 This chanpter is going to make the walking skeleton more formal. It adds one end-to-end test (sniperMakesAHigherBidButLoses()) and two unit tests (notifiesAuctionClosedWhenCloseMessageReceived() and notifiesBidDetailWhenCurrentPriceMessageReceived()).
 The end-to-end test sniperMakesAHigherBidButLoses() is not finished in Chapter 11, and it fails the test because auction sniper hasn't bid yet. The related production codes will be completed in Chapter 12.
+This chapter also introduces an interface AuctionEventListener. In the unit test AuctionMessageTranslatorTest, the AuctionEventListener is a seam, and JMock acts as a stub to test class AuctionMessageTranslator.
 
 Meanwhile, in the example coces, it seems some constants are not explicitly mentioned in the book so I create below definitions.
 
@@ -25,4 +26,7 @@ public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; 
 ```
 
 ## Chapter 13
-In this chapter, authors are going to create some interfaces to make unit test more easier.
+In this chapter, the unit test AuctionSniperTest involves with two interfaces, the Auction and the SniperListener. We can see how AuctionSniperTest acts with two JMock.
+
+Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
+Once all unit tests and end-to-end tests are completed, this book demonstrate how tidying-up (a.k.a. refactoring) current source codes.
