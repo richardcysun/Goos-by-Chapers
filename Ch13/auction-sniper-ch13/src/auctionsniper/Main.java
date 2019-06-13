@@ -12,7 +12,7 @@ import org.jivesoftware.smack.XMPPException;
 import auctionsniper.ui.MainWindow;
 
 //Ch13, p.125 replace AuctionEventListener with SniperListener
-public class Main implements SniperListener {
+public class Main {
     @SuppressWarnings("unused") private Chat notTobeGCd;
     private MainWindow ui;
     
@@ -39,11 +39,13 @@ public class Main implements SniperListener {
 
     //Ch13, p.130, 132 revise entire function
     //Login as "sniper/sniper" and join "auction-item-54321" chat    
+    //Ch13, p.133, Because end-to-end test is passed, we can safely refactor XMPPAuction and SniperStateDisplayer
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
     	disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), null);
         this.notTobeGCd = chat;
         
+        //XMPPAuction is the first step to make entire structure more clean and reasonable
         Auction auction = new XMPPAuction(chat);       
         //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
         
@@ -53,7 +55,9 @@ public class Main implements SniperListener {
             e.printStackTrace(); 
         }     
         
-        chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction, this)));
+        //SniperStateDisplayer is another step to make entire structure more clean and reasonable
+        //So we can move sniperLost and sniperBidding to better places
+        chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction, new SniperStateDisplayer())));
         auction.join();
     }
     
@@ -85,38 +89,8 @@ public class Main implements SniperListener {
         });
     }
     
-    //Ch12, p.117
-    public void auctionClosed() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ui.showStaus(MainWindow.STATUS_LOST);
-            }
-        });
-    }
-    
-    //Add a null method for now to make application worked
-    public void currentPrice(int price, int increment) {
-        
-    }
-    
-    //Ch13, p.125
-    public void sniperLost() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ui.showStaus(MainWindow.STATUS_LOST);
-            }
-        });        
-    }
-    
-    public void sniperBidding() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                ui.showStaus(MainWindow.STATUS_BIDDING);
-            }
-        });          
-    }
-    
     //Nested class
+    //Ch13, p.132
     public static class XMPPAuction implements Auction {
         private final Chat chat;
         
@@ -141,4 +115,27 @@ public class Main implements SniperListener {
             }
         }
     }    
+    
+    //Ch13, p.134    
+    public class SniperStateDisplayer implements SniperListener {       
+        public void sniperLost() {
+            showStatus(MainWindow.STATUS_LOST);
+        }
+
+        public void sniperBidding() {
+            showStatus(MainWindow.STATUS_BIDDING);
+        }
+
+        public void sniperWinning() {
+            showStatus(MainWindow.STATUS_WINNING);
+        }
+        
+        private void showStatus(final String status) {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    ui.showStaus(status);
+                }
+            });          
+        }
+    }
 }
