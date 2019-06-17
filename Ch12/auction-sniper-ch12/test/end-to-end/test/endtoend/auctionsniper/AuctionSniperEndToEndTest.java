@@ -19,7 +19,7 @@ public class AuctionSniperEndToEndTest {
         auction.announceClosed();                   //Step 4
         
         //If the UI doesn't show "Lost", throw exception i think
-        application.showSniperHasLostAuction();     //Step 5
+        application.showsSniperHasLostAuction();     //Step 5
     }
     
     //Ch12, p.106
@@ -38,7 +38,7 @@ public class AuctionSniperEndToEndTest {
     	auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);	//Step 6
     	
     	auction.announceClosed();                   //Step 7
-        application.showSniperHasLostAuction();     //Step 8    	
+        application.showsSniperHasLostAuction();     //Step 8    	
     }
     
     @After public void stopAuction() {

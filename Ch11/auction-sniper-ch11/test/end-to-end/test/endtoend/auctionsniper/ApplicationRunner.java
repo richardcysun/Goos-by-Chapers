@@ -34,7 +34,7 @@ public class ApplicationRunner {
     driver.showsSniperStatus(MainWindow.STATUS_JOINING);
     }
 
-    public void showSniperHasLostAuction() {
+    public void showsSniperHasLostAuction() {
         //if the "Lost" is appeared on UI
         driver.showsSniperStatus(MainWindow.STATUS_LOST);
     }

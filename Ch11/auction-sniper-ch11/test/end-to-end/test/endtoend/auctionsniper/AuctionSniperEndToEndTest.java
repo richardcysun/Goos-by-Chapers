@@ -19,7 +19,7 @@ public class AuctionSniperEndToEndTest {
         auction.announceClosed();                   //Step 4
         
         //If the UI doesn't show "Lost", throw exception i think
-        application.showSniperHasLostAuction();     //Step 5
+        application.showsSniperHasLostAuction();     //Step 5
     }
     
     @After public void stopAuction() {
