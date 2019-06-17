@@ -30,3 +30,29 @@ In this chapter, the unit test AuctionSniperTest involves with two interfaces, t
 
 Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
 Once all unit tests and end-to-end tests are completed, this book demonstrate how tidying-up (a.k.a. refactoring) current source codes.
+
+## Chapter 14
+Again, some defintions are not mentioned in this chapter.
+
+```java
+// AuctionMessageTranslator.java
+public AuctionMessageTranslator(String sniperId, AuctionEventListener listener) {
+    this.sniperId = sniperId;
+    [...]
+
+// SniperListener.java
+public interface SniperListener extends EventListener {
+   [...]
+    void sniperWinning();
+}
+
+// ApplicationRunner.java
+    public void hasShownSniperIsWinning() {
+        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+    }
+
+    public void showsSniperHasWonAuction() {
+        driver.showsSniperStatus(MainWindow.STATUS_WON);
+    }
+
+```
