@@ -57,7 +57,9 @@ public class Main {
         
         //SniperStateDisplayer is another step to make entire structure more clean and reasonable
         //So we can move sniperLost and sniperBidding to better places
-        chat.addMessageListener(new AuctionMessageTranslator(new AuctionSniper(auction, new SniperStateDisplayer())));
+        //Ch14, p.142, add connection.getUser()
+        chat.addMessageListener(new AuctionMessageTranslator(connection.getUser(), 
+                new AuctionSniper(auction, new SniperStateDisplayer())));
         auction.join();
     }
     

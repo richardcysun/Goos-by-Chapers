@@ -14,8 +14,16 @@ public class AuctionSniper implements AuctionEventListener{
         sniperListener.sniperLost();
     }
     
-    public void currentPrice(int price, int increment) {
-        auction.bid(price + increment);
-        sniperListener.sniperBidding();
+    //Ch14, p.143
+    public void currentPrice(int price, int increment, PriceSource priceSource) {
+        switch (priceSource) {
+        case FromSniper:
+            sniperListener.sniperWinning();
+        break;
+        case FromOtherBidder:
+            auction.bid(price + increment);
+            sniperListener.sniperBidding();
+            break;
+        }
     }
 }

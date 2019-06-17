@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import auctionsniper.Auction;
+import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
 
@@ -38,6 +39,18 @@ public class AuctionSniperTest {
                 atLeast(1).of(sniperListener).sniperBidding();
             }
         });
-        sniper.currentPrice(price, increment);
+        //Set FromOtherBidder due to interface enhancement of currentPrice
+        //It should be FromOtherBidder so Sniper can bid higher price
+        sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
+    }
+    
+    //Ch14, p.143
+    @Test public void reportsIsWinningWhenCurrentPriceComesFromSniper() {
+        context.checking(new Expectations() {
+            {
+                atLeast(1).of(sniperListener).sniperWinning();
+            }
+        });
+        sniper.currentPrice(123, 45, PriceSource.FromSniper);
     }
 }

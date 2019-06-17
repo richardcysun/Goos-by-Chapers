@@ -19,7 +19,7 @@ public class AuctionSniperEndToEndTest {
         auction.announceClosed();                   //Step 4
         
         //If the UI doesn't show "Lost", throw exception i think
-        application.showSniperHasLostAuction();     //Step 5
+        application.showsSniperHasLostAuction();     //Step 5
     }
     
     //Ch12, p.106
@@ -38,7 +38,24 @@ public class AuctionSniperEndToEndTest {
     	auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);	//Step 6
     	
     	auction.announceClosed();                   //Step 7
-        application.showSniperHasLostAuction();     //Step 8    	
+        application.showsSniperHasLostAuction();     //Step 8    	
+    }
+    
+    //Ch14, p.140
+    @Test public void sniperWinsAnAuctionByBiddingHigher() throws Exception {
+        auction.startSellingItem();                 //Step 1
+        application.startBiddingIn(auction);        //Step 2
+
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID); //Step 3
+        auction.reportPrice(1000, 98, "other bidder");  //Step 4
+        application.hasShownSniperIsBidding();      //Step 5
+        auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID); //Step 6
+
+        auction.reportPrice(1098, 97, ApplicationRunner.SNIPER_XMPP_ID);  //Step 7
+        application.hasShownSniperIsWinning();      //Step 8
+        
+        auction.announceClosed();                   //Step 9
+        application.showsSniperHasWonAuction();     //Step 10       
     }
     
     @After public void stopAuction() {
