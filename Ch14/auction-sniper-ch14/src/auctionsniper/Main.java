@@ -119,11 +119,16 @@ public class Main {
     }    
     
     //Ch13, p.134    
-    public class SniperStateDisplayer implements SniperListener {       
+    public class SniperStateDisplayer implements SniperListener {     
+        //Ch14, p.147
+        public void sniperWon() {
+            showStatus(MainWindow.STATUS_WON);
+        }
+
         public void sniperLost() {
             showStatus(MainWindow.STATUS_LOST);
         }
-
+        
         public void sniperBidding() {
             showStatus(MainWindow.STATUS_BIDDING);
         }
