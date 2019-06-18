@@ -8,6 +8,8 @@ Pleaes be noticed that this repository is a kind of personal study note. In addi
 In this chapter, authors simply created a walking skeleton. Apprently, the efforts of building up a skeleton is larger than original expectations.
 In the example coces, there was a tricky part confused me a while. How come the FakeAuctionServer announces auction close by sending empty message in Chat?
 While Main receiving a message (empty or not, no matter) from Chat, it always put "Lost" on the Label. The actual implements will be filled in following chapters. 
+### Class Diagram of End-to-End Test
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch11/auction-sniper-ch11/test/end-to-end/test/endtoend/auctionsniper/Ch11_e2eTest_ClassDiagram.jpg)
 
 ## Chapter 12
 This chanpter is going to make the walking skeleton more formal. It adds one end-to-end test (sniperMakesAHigherBidButLoses()) and two unit tests (notifiesAuctionClosedWhenCloseMessageReceived() and notifiesBidDetailWhenCurrentPriceMessageReceived()).
@@ -24,7 +26,7 @@ public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
 public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 ```
-
+### Class Diagram of Src
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch12/auction-sniper-ch12/src/auctionsniper/Ch12_ClassDiagram.jpg)
 
 ## Chapter 13
@@ -33,6 +35,7 @@ In this chapter, the unit test AuctionSniperTest involves with two interfaces, t
 Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
 Once all unit tests and end-to-end tests are completed, this book demonstrate how tidying-up (a.k.a. refactoring) current source codes.
 
+### Class Diagram of Src
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
 
 ## Chapter 14
@@ -60,4 +63,5 @@ public interface SniperListener extends EventListener {
     }
 
 ```
+### Class Diagram of Src
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch14/auction-sniper-ch14/src/auctionsniper/Ch14_ClassDiagram.jpg)
