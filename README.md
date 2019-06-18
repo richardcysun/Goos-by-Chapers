@@ -25,11 +25,15 @@ public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN
 public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 ```
 
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch12/auction-sniper-ch12/src/auctionsniper/Ch12_ClassDiagram.jpg)
+
 ## Chapter 13
 In this chapter, the unit test AuctionSniperTest involves with two interfaces, the Auction and the SniperListener. We can see how AuctionSniperTest acts with two JMock.
 
 Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
 Once all unit tests and end-to-end tests are completed, this book demonstrate how tidying-up (a.k.a. refactoring) current source codes.
+
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
 
 ## Chapter 14
 Again, some defintions are not mentioned in this chapter.
@@ -56,3 +60,4 @@ public interface SniperListener extends EventListener {
     }
 
 ```
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch14/auction-sniper-ch14/src/auctionsniper/Ch14_ClassDiagram.jpg)
