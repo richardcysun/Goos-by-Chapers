@@ -140,7 +140,7 @@ public class Main {
         private void showStatus(final String status) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ui.showStaus(status);
+                    ui.showStatusText(status);
                 }
             });          
         }
