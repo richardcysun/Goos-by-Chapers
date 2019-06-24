@@ -13,14 +13,16 @@ public class ApplicationRunner {
 	public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 
     private AuctionSniperDriver driver;
+    private String itemId;
 
     //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer auction) {
+        itemId = auction.getItemId();
         Thread thread = new Thread("Test Application") {
         @Override public void run() {
             try {
                 //Application Runner drives Main of production codes
-                Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, auction.getItemId());
+                Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, itemId);
             }//try
             catch (Exception e) {
                e.printStackTrace(); 
@@ -48,15 +50,20 @@ public class ApplicationRunner {
     }
 
     //Ch12, p.110
-	public void hasShownSniperIsBidding() {
-		driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
+    public void hasShownSniperIsBidding() {
+        driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
+    }
+    
+    //Ch15, p.153
+	public void hasShownSniperIsBidding(int lastPrice, int lastBid) {
+		driver.showsSniperStatus(itemId, lastPrice, lastBid, MainWindow.STATUS_BIDDING);
 	}
 
-    public void hasShownSniperIsWinning() {
-        driver.showsSniperStatus(MainWindow.STATUS_WINNING);
+    public void hasShownSniperIsWinning(int winningBid) {
+        driver.showsSniperStatus(itemId, winningBid, winningBid, MainWindow.STATUS_WINNING);
     }
 
-    public void showsSniperHasWonAuction() {
-        driver.showsSniperStatus(MainWindow.STATUS_WON);
+    public void showsSniperHasWonAuction(int lastPrice) {
+        driver.showsSniperStatus(itemId, lastPrice, lastPrice, MainWindow.STATUS_WON);
     }
 }

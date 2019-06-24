@@ -5,8 +5,10 @@ import com.objogate.wl.swing.driver.JFrameDriver;
 import com.objogate.wl.swing.driver.JTableDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 
+import static java.lang.String.valueOf;
 import static org.hamcrest.Matchers.*;
 import static com.objogate.wl.swing.matcher.JLabelTextMatcher.withLabelText;
+import static com.objogate.wl.swing.matcher.IterableComponentsMatcher.matching;
 
 //import auctionsniper.Main;
 import auctionsniper.ui.MainWindow;
@@ -27,6 +29,13 @@ public class AuctionSniperDriver extends JFrameDriver{
     //Ch15, p.150, replace JLabel with JTable
     public void showsSniperStatus(String statusText) {
         new JTableDriver(this).hasCell(withLabelText(equalTo(statusText)));
+    }
+    
+    //Ch15, p.153
+    public void showsSniperStatus(String itemId, int lastPrice, int lastBid, String statusText) {
+        JTableDriver table = new JTableDriver(this);
+        table.hasRow(matching(withLabelText(itemId), withLabelText(valueOf(lastPrice)), 
+                withLabelText(valueOf(lastBid)), withLabelText(statusText)));
     }
 
 }
