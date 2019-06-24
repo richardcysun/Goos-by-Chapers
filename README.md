@@ -5,6 +5,8 @@ In the [sf105](https://github.com/sf105/goos-code), it provides a complete work 
 Pleaes be noticed that this repository is a kind of personal study note. In addition to original Java codes, some comments are adressed to help me understand what's really happening. Some additional codes are added (and comment-out befoe I commit to Git) to help me observe how this test work in live manner.
 
 ## Chapter 11
+**TO DO: Single item-join, lose without bidding.**
+
 In this chapter, authors simply created a walking skeleton. Apprently, the efforts of building up a skeleton is larger than original expectations.
 In the example coces, there was a tricky part confused me a while. How come the FakeAuctionServer announces auction close by sending empty message in Chat?
 While Main receiving a message (empty or not, no matter) from Chat, it always put "Lost" on the Label. The actual implements will be filled in following chapters. 
@@ -12,6 +14,8 @@ While Main receiving a message (empty or not, no matter) from Chat, it always pu
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch11/auction-sniper-ch11/test/end-to-end/test/endtoend/auctionsniper/Ch11_e2eTest_ClassDiagram.jpg)
 
 ## Chapter 12
+**TO DO: Single item-join, bid & lose. (part I)**
+
 This chanpter is going to make the walking skeleton more formal. It adds one end-to-end test (sniperMakesAHigherBidButLoses()) and two unit tests (notifiesAuctionClosedWhenCloseMessageReceived() and notifiesBidDetailWhenCurrentPriceMessageReceived()).
 The end-to-end test sniperMakesAHigherBidButLoses() is not finished in Chapter 11, and it fails the test because auction sniper hasn't bid yet. The related production codes will be completed in Chapter 12.
 This chapter also introduces an interface AuctionEventListener. In the unit test AuctionMessageTranslatorTest, the AuctionEventListener is a seam, and JMock acts as a stub to test class AuctionMessageTranslator.
@@ -30,6 +34,8 @@ public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; 
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch12/auction-sniper-ch12/src/auctionsniper/Ch12_ClassDiagram.jpg)
 
 ## Chapter 13
+**TO DO: Single item-join, bid & lose. (part II)**
+
 In this chapter, the unit test AuctionSniperTest involves with two interfaces, the Auction and the SniperListener. We can see how AuctionSniperTest acts with two JMock.
 
 Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
@@ -39,6 +45,8 @@ Once all unit tests and end-to-end tests are completed, this book demonstrate ho
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
 
 ## Chapter 14
+**TO DO: Single item-join, bid & win.**
+
 Again, some defintions are not mentioned in this chapter.
 
 ```java
@@ -65,3 +73,6 @@ public interface SniperListener extends EventListener {
 ```
 ### Class Diagram of Src
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch14/auction-sniper-ch14/src/auctionsniper/Ch14_ClassDiagram.jpg)
+
+## Chapter 15
+**TO DO: Single item-show price details.**
