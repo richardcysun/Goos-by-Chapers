@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import auctionsniper.SniperState;
+
 //Ch11, p.97, 98, 102
 public class MainWindow extends JFrame{
 
@@ -20,7 +22,7 @@ public class MainWindow extends JFrame{
     private static final String SNIPER_TABLE_NAME = "Auction Sniper Table";
     private static final String APPLICATION_TITLE = "Auction Sniper Title";
     
-    private final SniperTableModel snipers = new SniperTableModel();
+    private final SnipersTableModel snipers = new SnipersTableModel();
 
     //Ch15, p.151, replace JLabel with JTable
     public MainWindow() {
@@ -48,5 +50,11 @@ public class MainWindow extends JFrame{
     
     public void showStatusText(String statusText) {
         snipers.setStatusText(statusText);
+    }
+
+    //Ch15, p.156
+    public void sniperStatusChanged(SniperState sniperState, String statusText) {
+        snipers.sniperStatusChanged(sniperState, statusText);
+        
     }
 }

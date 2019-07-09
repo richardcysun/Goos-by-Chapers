@@ -129,8 +129,13 @@ public class Main {
             showStatus(MainWindow.STATUS_LOST);
         }
         
-        public void sniperBidding() {
-            showStatus(MainWindow.STATUS_BIDDING);
+        //Ch15, p.156
+        public void sniperBidding(final SniperState state) {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    ui.sniperStatusChanged(state, MainWindow.STATUS_BIDDING);
+                }
+            });
         }
 
         public void sniperWinning() {

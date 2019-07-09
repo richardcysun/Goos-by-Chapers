@@ -11,6 +11,7 @@ import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
+import auctionsniper.SniperState;
 
 //Ch13, p.124
 @RunWith(JMock.class)
@@ -32,12 +33,15 @@ public class AuctionSniperTest {
     
     //Ch13, p.127
     @Test public void bidsHigherAndReportsBiddingWhenNewPriceArrives() {
+        final String ITEM_ID = "item-54321";
         final int price = 1001;
         final int increment = 25;
+        final int bid = price + increment;
         context.checking(new Expectations() {
             {
-                one(auction).bid(price+increment);
-                atLeast(1).of(sniperListener).sniperBidding();
+                one(auction).bid(bid);
+                //Ch15, p.155
+                atLeast(1).of(sniperListener).sniperBidding(new SniperState(ITEM_ID, price, bid));
             }
         });
         //Set FromOtherBidder due to interface enhancement of currentPrice
@@ -69,7 +73,8 @@ public class AuctionSniperTest {
         context.checking(new Expectations() {
             {
                 ignoring(auction);
-                allowing(sniperListener).sniperBidding();
+                //Ch15, p.155
+                allowing(sniperListener).sniperBidding(with(any(SniperState.class)));
                     then(sniperState.is("bidding"));
                 atLeast(1).of(sniperListener).sniperLost();
                     when(sniperState.is("bidding"));
