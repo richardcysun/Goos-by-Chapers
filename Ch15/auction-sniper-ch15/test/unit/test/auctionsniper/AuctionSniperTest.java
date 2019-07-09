@@ -11,7 +11,7 @@ import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.AuctionSniper;
 import auctionsniper.SniperListener;
-import auctionsniper.SniperState;
+import auctionsniper.SniperSnapshot;
 
 //Ch13, p.124
 @RunWith(JMock.class)
@@ -41,7 +41,7 @@ public class AuctionSniperTest {
             {
                 one(auction).bid(bid);
                 //Ch15, p.155
-                atLeast(1).of(sniperListener).sniperBidding(new SniperState(ITEM_ID, price, bid));
+                atLeast(1).of(sniperListener).sniperBidding(new SniperSnapshot(ITEM_ID, price, bid));
             }
         });
         //Set FromOtherBidder due to interface enhancement of currentPrice
@@ -74,7 +74,7 @@ public class AuctionSniperTest {
             {
                 ignoring(auction);
                 //Ch15, p.155
-                allowing(sniperListener).sniperBidding(with(any(SniperState.class)));
+                allowing(sniperListener).sniperBidding(with(any(SniperSnapshot.class)));
                     then(sniperState.is("bidding"));
                 atLeast(1).of(sniperListener).sniperLost();
                     when(sniperState.is("bidding"));

@@ -130,10 +130,10 @@ public class Main {
         }
         
         //Ch15, p.156
-        public void sniperBidding(final SniperState state) {
+        public void sniperBidding(final SniperSnapshot snapshot) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ui.sniperStatusChanged(state, MainWindow.STATUS_BIDDING);
+                    ui.sniperStatusChanged(snapshot, MainWindow.STATUS_BIDDING);
                 }
             });
         }
