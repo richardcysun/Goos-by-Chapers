@@ -141,10 +141,6 @@ public class Main {
                 }
             });
         }
-
-        public void sniperLost() {
-            showStatus(MainWindow.STATUS_LOST);
-        }
         
         //Ch15, p.156
         public void sniperBidding(final SniperSnapshot snapshot) {
@@ -170,14 +166,6 @@ public class Main {
                     ui.sniperStateChanged(snapshot);
                 }
             });  
-        }
-        
-        private void showStatus(final String status) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    ui.showStatusText(status);
-                }
-            });          
         }
     }
 }
