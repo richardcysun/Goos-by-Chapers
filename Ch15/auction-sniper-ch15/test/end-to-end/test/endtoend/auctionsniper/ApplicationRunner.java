@@ -1,7 +1,9 @@
 package test.endtoend.auctionsniper;
 
 import auctionsniper.Main;
+import auctionsniper.SniperState;
 import auctionsniper.ui.MainWindow;
+import auctionsniper.ui.SnipersTableModel;
 
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
 
@@ -18,29 +20,35 @@ public class ApplicationRunner {
     //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer auction) {
         itemId = auction.getItemId();
+        
         Thread thread = new Thread("Test Application") {
-        @Override public void run() {
-            try {
-                //Application Runner drives Main of production codes
-                Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, itemId);
-            }//try
-            catch (Exception e) {
-               e.printStackTrace(); 
-            }//catch
-        }//run
-    };//thread
-    thread.setDaemon(true);
-    thread.start();
+            @Override public void run() {
+                try {
+                    //Application Runner drives Main of production codes
+                    Main.main(XMPP_HOSTNAME, SNIPER_ID, SNIPER_PASSWORD, itemId);
+                }//try
+                catch (Exception e) {
+                    e.printStackTrace(); 
+                }//catch
+            }//run
+        };//thread
+        
+        thread.setDaemon(true);
+        thread.start();
     
-    //Check WindowLicker swing queue every seconds
-    driver = new AuctionSniperDriver(1000);
-    //if the "Joining" is appeared on Main's UI
-    driver.showsSniperStatus(MainWindow.STATUS_JOINING);
+        //Check WindowLicker swing queue every seconds
+        //Ch15, p.169
+        driver = new AuctionSniperDriver(1000);
+        driver.hasTitle(MainWindow.APPLICATION_TITLE);
+        driver.hasColumnTitles();
+        //if the "Joining" is appeared on Main's UI
+        driver.showsSniperStatus("", 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
     }
 
-    public void showsSniperHasLostAuction() {
+    public void showsSniperHasLostAuction(int lastPrice, int lastBid) {
         //if the "Lost" is appeared on UI
-        driver.showsSniperStatus(MainWindow.STATUS_LOST);
+        //driver.showsSniperStatus(MainWindow.STATUS_LOST);
+        driver.showsSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.textFor(SniperState.LOST));
     }
     
     public void stop() {
@@ -50,9 +58,9 @@ public class ApplicationRunner {
     }
 
     //Ch12, p.110
-    public void hasShownSniperIsBidding() {
+    /*public void hasShownSniperIsBidding() {
         driver.showsSniperStatus(MainWindow.STATUS_BIDDING);
-    }
+    }*/
     
     //Ch15, p.153
 	public void hasShownSniperIsBidding(int lastPrice, int lastBid) {

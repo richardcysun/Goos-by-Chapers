@@ -20,14 +20,15 @@ public class MainWindow extends JFrame{
     public static final String STATUS_LOST = "Lost";
     public static final String STATUS_WON = "Won";
     private static final String SNIPER_TABLE_NAME = "Auction Sniper Table";
-    private static final String APPLICATION_TITLE = "Auction Sniper Title";
+    public static final String APPLICATION_TITLE = "Auction Sniper Title";
     
-    private final SnipersTableModel snipers = new SnipersTableModel();
+    private SnipersTableModel snipers;
 
     //Ch15, p.151, replace JLabel with JTable
-    public MainWindow() {
+    public MainWindow(SnipersTableModel snipers) {
         super(APPLICATION_TITLE);
         setName(MainWindow.MAIN_WINDOW_NAME);
+        this.snipers = snipers;
         fillContentPane(makeSnipersTable());
         //It shows "Joining" by default
         pack();
@@ -53,8 +54,8 @@ public class MainWindow extends JFrame{
     }
 
     //Ch15, p.156
-    public void sniperStatusChanged(SniperSnapshot sniperSnapshot, String statusText) {
-        snipers.sniperStatusChanged(sniperSnapshot, statusText);
-        
+    //CH15, p.167 revised
+    public void sniperStateChanged(SniperSnapshot snapshot) {
+        snipers.sniperStateChanged(snapshot);
     }
 }
