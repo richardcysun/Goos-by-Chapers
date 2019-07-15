@@ -132,33 +132,7 @@ public class Main {
     
     //Ch13, p.134    
     //Ch15, p.168 rename
-    public class SwingThreadSniperListener implements SniperListener {     
-        //Ch14, p.147
-        public void sniperWon(final SniperSnapshot snapshot) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    ui.sniperStateChanged(snapshot);
-                }
-            });
-        }
-        
-        //Ch15, p.156
-        public void sniperBidding(final SniperSnapshot snapshot) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    ui.sniperStateChanged(snapshot);
-                }
-            });
-        }
-
-        public void sniperWinning(final SniperSnapshot snapshot) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    ui.sniperStateChanged(snapshot);
-                }
-            });
-        }
-        
+    public class SwingThreadSniperListener implements SniperListener {             
         //Ch15, p.168
         public void sniperStateChanged(final SniperSnapshot snapshot) {
             SwingUtilities.invokeLater(new Runnable() {
