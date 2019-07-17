@@ -16,11 +16,13 @@ While Main receiving a message (empty or not, no matter) from Chat, it always pu
 ## Chapter 12
 **TO DO: Single item-join, bid & lose. (part I)**
 
-This chanpter is going to make the walking skeleton more formal. It adds one end-to-end test (sniperMakesAHigherBidButLoses()) and two unit tests (notifiesAuctionClosedWhenCloseMessageReceived() and notifiesBidDetailWhenCurrentPriceMessageReceived()).
-The end-to-end test sniperMakesAHigherBidButLoses() is not finished in Chapter 11, and it fails the test because auction sniper hasn't bid yet. The related production codes will be completed in Chapter 12.
-This chapter also introduces an interface AuctionEventListener. In the unit test AuctionMessageTranslatorTest, the AuctionEventListener is a seam, and JMock acts as a stub to test class AuctionMessageTranslator.
+This chapter is going to make the walking skeleton more formal. One end-to-end test (**sniperMakesAHigherBidButLoses**) and two unit tests (**notifiesAuctionClosedWhenCloseMessageReceived** and **notifiesBidDetailWhenCurrentPriceMessageReceived**) are forged for future production codes.
 
-Meanwhile, in the example coces, it seems some constants are not explicitly mentioned in the book so I create below definitions.
+The end-to-end test **sniperMakesAHigherBidButLoses** is not finished in Chapter 11, and it fails the test because auction sniper hasn't bid yet. The related production codes will be completed in Chapter 12.
+
+To demonstrate the skill of TDD, an interface **AuctionEventListener** is introduced. In the unit test **AuctionMessageTranslatorTest**, the **AuctionEventListener** is a seam, and JMock acts as a stub to test class **AuctionMessageTranslator**.
+
+By the way, in the example coces, it seems some constants are not mentioned in the book so I create below definitions.
 
 ```java
 // ApplicationRunner.java
@@ -42,7 +44,7 @@ Compared to Chapter 12, ther are some highlights.
 3. **AuctionSniper** owns two new members, **SniperListener** (implemented by **SniperStateDisplayer**) is responsible for message display ,and **Auction** (implemented by **XMPPAuction**) is responsble for communication with Auction Server.
 4. Finally, another nested class **AuctionEvent** is given birth because it can make outer class **AuctionMessageTranslator** more neat and clean, and of course, much more easy to maintain.
 
-As for unit test, the **AuctionSniperTest** tests interfaces **Auction and SniperListener**.
+In the term of unit test, the **AuctionSniperTest** tests **AuctionSniper** with interfaces **Auction** and **SniperListener**. They both are good seams to insert mockup.
 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
