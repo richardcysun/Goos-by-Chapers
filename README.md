@@ -7,7 +7,7 @@ Pleaes be noticed that this repository is a kind of personal study note. In addi
 ## Chapter 11
 **TO DO: Single item-join, lose without bidding.**
 
-In this chapter, authors simply created a walking skeleton. Apprently, the efforts of building up a skeleton is larger than original expectations.
+In this chapter, authors simply create a walking skeleton. Apprently, the efforts of building up a skeleton is larger than initial expectations.
 In the example coces, there was a tricky part confused me a while. How come the FakeAuctionServer announces auction close by sending empty message in Chat?
 While Main receiving a message (empty or not, no matter) from Chat, it always put "Lost" on the Label. The actual implements will be filled in following chapters. 
 ### Class Diagram of End-to-End Test
@@ -30,18 +30,21 @@ public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
 public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; Price: %d;";
 ```
-### Class Diagram of Src
+### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch12/auction-sniper-ch12/src/auctionsniper/Ch12_ClassDiagram.jpg)
 
 ## Chapter 13
 **TO DO: Single item-join, bid & lose. (part II)**
 
-In this chapter, the unit test AuctionSniperTest involves with two interfaces, the Auction and the SniperListener. We can see how AuctionSniperTest acts with two JMock.
+Compared to Chapter 12, ther are some highlights.
+1. For better "Role and Responsibility" discipline, nested classes **SniperStateDisplayer** (GUI) and **XMPPAuction** (Communication) are created.
+2. Core business logics are moved to the new class **AuctionSniper** from class **Main**. The **AuctionSniper** implements **AuctionEventListener**, and it coordinates the auction "joining" and "bidding" with **FakeAuctionServer**.
+3. **AuctionSniper** owns two new members, **SniperListener** (implemented by **SniperStateDisplayer**) is responsible for message display ,and **Auction** (implemented by **XMPPAuction**) is responsble for communication with Auction Server.
+4. Finally, another nested class **AuctionEvent** is given birth because it can make outer class **AuctionMessageTranslator** more neat and clean, and of course, much more easy to maintain.
 
-Finally, Auction Sniper joins and bids with FakeAuctionServer, it also passes the end-to-end test.
-Once all unit tests and end-to-end tests are completed, this book demonstrate how tidying-up (a.k.a. refactoring) current source codes.
+As for unit test, the **AuctionSniperTest** tests interfaces **Auction and SniperListener**.
 
-### Class Diagram of Src
+### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
 
 ## Chapter 14
@@ -76,3 +79,7 @@ public interface SniperListener extends EventListener {
 
 ## Chapter 15
 **TO DO: Single item-show price details.**
+
+### Class Diagram of Source Codes
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch15/auction-sniper-ch15/src/auctionsniper/Ch15_ClassDiagram.jpg)
+
