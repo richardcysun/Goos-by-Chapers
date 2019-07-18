@@ -71,7 +71,7 @@ public class Main {
                 new AuctionMessageTranslator(
                         connection.getUser(), 
                         new AuctionSniper(itemId, auction, 
-                                new SwingThreadSniperListener())));
+                                new SwingThreadSniperListener(snipers))));
         auction.join();
     }
     
@@ -132,12 +132,16 @@ public class Main {
     
     //Ch13, p.134    
     //Ch15, p.168 rename
-    public class SwingThreadSniperListener implements SniperListener {             
+    public class SwingThreadSniperListener implements SniperListener {     
+        private final SniperListener delegate;
+        public SwingThreadSniperListener(SniperListener delegate) {
+          this.delegate = delegate;
+        } 
         //Ch15, p.168
         public void sniperStateChanged(final SniperSnapshot snapshot) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    ui.sniperStateChanged(snapshot);
+                    delegate.sniperStateChanged(snapshot);
                 }
             });  
         }

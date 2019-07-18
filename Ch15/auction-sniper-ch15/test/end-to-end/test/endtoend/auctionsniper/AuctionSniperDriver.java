@@ -29,12 +29,7 @@ public class AuctionSniperDriver extends JFrameDriver {
                         showingOnScreen()),
                 new AWTEventQueueProber(timeoutMillis, 100));
     }
-    
-    //Ch15, p.150, replace JLabel with JTable
-    /*public void showsSniperStatus(String statusText) {
-        new JTableDriver(this).hasCell(withLabelText(equalTo(statusText)));
-    }*/
-    
+       
     //Ch15, p.153
     public void showsSniperStatus(String itemId, int lastPrice, int lastBid, String statusText) {
         JTableDriver table = new JTableDriver(this);
