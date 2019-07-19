@@ -57,12 +57,15 @@ In the term of unit test, the **AuctionSniperTest** tests **AuctionSniper** with
 
 In this chapter, the auction sniper wins for the very first time.
 
-Compared to Chapter 13, it doesn't change production codes in large scale. In stead, this chapter mainly focuses on the elaobration of test scenes.
+Compared to Chapter 13, it doesn't change production codes in large scale. In stead, this chapter mainly focuses on the elaobration of test scenes about how to win and how to bid.
 
 Here are some highlights.
 1. An enumeration **PriceSource** is created to distiguish sniper and other bidder.
-2. **AuctionMessageTranslator** can judge who is bidding at what price.
-3. **AuctionSniper**(implements **AuctionEventListener**) can judge sniper is winning or not.
+2. **AuctionMessageTranslator** collaborates with **AuctionEvent** parser to see who is bidding at what price.
+3. **AuctionSniper**(implements **AuctionEventListener**) take actions (winning or bidding) according to **SniperState**.
+4. If currentPrice() receives a price from other bidders, then bids with higher price (price+increment), this is the bidding state.
+5. If currentPrice() receives a price from sniper, the state is winning.
+6. At the moment of auction closed, if the state is bidding, the sniper loses auction. If the state is winning, the sniper wins.
 
 Again, some defintions are not mentioned in this chapter.
 
@@ -95,7 +98,7 @@ public interface SniperListener extends EventListener {
 **TO DO: Single item-show price details.**
 
 In this chapter, JLabel is replaced by JTable for better data visibility.
-
+With the table with details, the **SniperSnapshot** is designed to carry more details bidding information, such as item ID, latest price (of everyone) and latest bid (of sniper).
 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch15/auction-sniper-ch15/src/auctionsniper/Ch15_ClassDiagram.jpg)
