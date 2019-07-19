@@ -1,6 +1,7 @@
 package auctionsniper;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 //Ch15, p.154
 public class SniperSnapshot {
@@ -17,9 +18,18 @@ public class SniperSnapshot {
         this.state = state;
     }
 
+    //Copy equals() and toString() from https://github.com/sf105/goos-code/blob/master/src/auctionsniper/SniperSnapshot.java
+    ///Without equals(), different SniperSnapshot objects with the same values will be considered as not equal.
     @Override
     public boolean equals(Object obj) {
       return EqualsBuilder.reflectionEquals(this, obj);
+    }
+    
+    //With toString(), it can dump details of SniperSnapshot, it's very helpful to trace details with
+    //System.out.println(snapshot);
+    @Override
+    public String toString() {
+      return ToStringBuilder.reflectionToString(this);
     }
     
     //Ch15, p.156
