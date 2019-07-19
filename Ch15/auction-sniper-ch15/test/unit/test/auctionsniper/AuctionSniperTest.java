@@ -96,7 +96,7 @@ public class AuctionSniperTest {
                 //Ch15, p.161 revised
                 allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(BIDDING)));
                     then(sniperState.is("bidding"));
-                atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 0, 0, LOST));
+                atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 123, 168, LOST));
                     when(sniperState.is("bidding"));
             }
         });

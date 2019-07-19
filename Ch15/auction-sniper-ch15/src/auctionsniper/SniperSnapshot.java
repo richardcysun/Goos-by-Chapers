@@ -1,5 +1,7 @@
 package auctionsniper;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+
 //Ch15, p.154
 public class SniperSnapshot {
     public final String itemId;
@@ -15,6 +17,11 @@ public class SniperSnapshot {
         this.state = state;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+      return EqualsBuilder.reflectionEquals(this, obj);
+    }
+    
     //Ch15, p.156
     public SniperSnapshot bidding(int newLastPrice, int newLastBid) {
         return new SniperSnapshot(itemId, newLastPrice, newLastBid, SniperState.BIDDING);

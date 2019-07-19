@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="lib/develop/junit-dep-4.6.jar"/>
 	<classpathentry kind="lib" path="lib/develop/windowlicker-core-DEV.jar"/>
 	<classpathentry kind="lib" path="lib/develop/windowlicker-swing-DEV.jar"/>
+	<classpathentry kind="lib" path="lib/deploy/commons-lang-2.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
