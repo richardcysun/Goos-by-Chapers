@@ -42,15 +42,7 @@ public class Main implements AuctionEventListener {
     private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
     	disconnectWhenUICloses(connection);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection),
-                new AuctionMessageTranslator(this));
-        
-        //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
-        
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace(); 
-        }     
+                new AuctionMessageTranslator(this));     
         
         //Ch12, p.110 revise Ch11
         chat.sendMessage(JOIN_COMMAND_FORMAT);

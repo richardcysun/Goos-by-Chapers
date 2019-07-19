@@ -47,13 +47,6 @@ public class Main {
         
         //XMPPAuction is the first step to make entire structure more clean and reasonable
         Auction auction = new XMPPAuction(chat);       
-        //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
-        
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace(); 
-        }     
         
         //SniperStateDisplayer is another step to make entire structure more clean and reasonable
         //So we can move sniperLost and sniperBidding to better places

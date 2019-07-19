@@ -48,15 +48,7 @@ public class Main {
                         });
                     }
                 });
-        this.notTobeGCd = chat;
-        
-        //Turn on below 3 second delay so we may have chance the observe the Joining->Lost messages
-        
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace(); 
-        }     
+        this.notTobeGCd = chat;     
         
         //Send a empty message to Chat
         chat.sendMessage(new Message());        
