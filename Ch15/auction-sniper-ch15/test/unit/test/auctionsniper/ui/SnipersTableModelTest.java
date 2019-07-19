@@ -1,4 +1,4 @@
-package test.auctionsniper;
+package test.auctionsniper.ui;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
