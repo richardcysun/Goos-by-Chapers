@@ -20,13 +20,14 @@ public class SingleMessageListener implements MessageListener {
         messages.add(message);
     }
     
-    //Ch12, p.108. revise Ch11
+    //Ch12, p.108, revise Ch11
+    //Ch16, p.178, revise Ch12
     public void receiveAMessage(Matcher<? super String> messageMatcher) throws InterruptedException {
         //If message is not coming in 5 seconds, exception
         //If message is null (empty message is not null), assert
         //If message is not match, assert
         final Message message = messages.poll(5, TimeUnit.SECONDS);
-        assertThat("Message", message, is(notNullValue()));
-        assertThat(message.getBody(), messageMatcher);        
+        //Ch16, p.177, revise Ch12
+        assertThat(message, hasProperty("body", messageMatcher));        
     }
 }
