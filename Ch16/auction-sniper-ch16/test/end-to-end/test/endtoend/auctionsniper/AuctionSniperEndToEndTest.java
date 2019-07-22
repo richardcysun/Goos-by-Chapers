@@ -28,8 +28,8 @@ public class AuctionSniperEndToEndTest {
         auction.hasReceivedJoinRequestFromSniper(); //Step 3
         auction.announceClosed();                   //Step 4
         holdOn();
-        //If the UI doesn't show "Lost", throw exception i think
-        application.showsSniperHasLostAuction(0, 0);     //Step 5
+        //revise this function based on the hint of Ch16, p.176
+        application.showsSniperHasLostAuction(auction, 0, 0);     //Step 5
         holdOn();
     }
     
@@ -49,7 +49,8 @@ public class AuctionSniperEndToEndTest {
     	auction.hasReceivedBid(1098, ApplicationRunner.SNIPER_XMPP_ID);	//Step 6
     	holdOn();
     	auction.announceClosed();                  //Step 7
-    	application.showsSniperHasLostAuction(1000, 1098);   //Step 8    	
+    	//revise this function based on the hint of Ch16, p.176
+    	application.showsSniperHasLostAuction(auction, 1000, 1098);   //Step 8    	
     	holdOn();
     }
 
@@ -97,8 +98,8 @@ public class AuctionSniperEndToEndTest {
         holdOn();
         auction.announceClosed();              		//Step 14
         auction2.announceClosed();                 	//Step 15
-        application.showsSniperHasWonAuction(auction, 1098); //Step 16
-        application.showsSniperHasWonAuction(auction2, 1098);//Step 17
+        application.showsSniperHasWonAuction(auction, 1098);//Step 16
+        application.showsSniperHasWonAuction(auction2, 521);//Step 17
         holdOn();
     }
     

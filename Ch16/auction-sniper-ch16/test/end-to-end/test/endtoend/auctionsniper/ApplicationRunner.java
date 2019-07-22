@@ -15,7 +15,6 @@ public class ApplicationRunner {
 	public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 
     private AuctionSniperDriver driver;
-    private String itemId;
 
     //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer... auctions) {
@@ -59,11 +58,10 @@ public class ApplicationRunner {
     	}   	
     	return arguments;
     }
-    
-    public void showsSniperHasLostAuction(int lastPrice, int lastBid) {
-        //if the "Lost" is appeared on UI
-        //driver.showsSniperStatus(MainWindow.STATUS_LOST);
-        driver.showsSniperStatus(itemId, lastPrice, lastBid, SnipersTableModel.textFor(SniperState.LOST));
+
+    //revise this function based on the hint of Ch16, p.176
+    public void showsSniperHasLostAuction(FakeAuctionServer auction, int lastPrice, int lastBid) {
+        driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid, SnipersTableModel.textFor(SniperState.LOST));
     }
     
     public void stop() {

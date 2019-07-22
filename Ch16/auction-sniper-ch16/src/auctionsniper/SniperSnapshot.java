@@ -51,4 +51,9 @@ public class SniperSnapshot {
     public SniperSnapshot closed() {
         return new SniperSnapshot(itemId, lastPrice, lastBid, state.whenAuctionClosed());
     }
+
+    //Copy isForSameItemAs() from https://github.com/sf105/goos-code/blob/master/src/auctionsniper/SniperSnapshot.java
+	public boolean isForSameItemAs(SniperSnapshot sniperSnapshot) {
+		return itemId.equals(sniperSnapshot.itemId);
+	}
 }

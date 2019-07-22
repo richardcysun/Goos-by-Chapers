@@ -31,7 +31,6 @@ public class Main {
 
 	//Ch15, p.168
     public Main() throws Exception {
-        //startUserInterface();
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
                 ui = new MainWindow(snipers);
@@ -41,15 +40,21 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         Main main = new Main();
-        main.joinAuction(connection(args[ARG_HOSTNAME],
-                args[ARG_USERNAME], args[ARG_PASSWORD]), args[ARG_ITEM_ID]);
+        //Ch16, p.179
+        XMPPConnection connection = connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
+        main.disconnectWhenUICloses(connection);
+        
+        for (int i = 3; i < args.length; i++) {
+            main.joinAuction(connection, args[i]);
+        }
     }
 
     //Ch13, p.130, 132 revise entire function
     //Login as "sniper/sniper" and join "auction-item-54321" chat    
     //Ch13, p.133, Because end-to-end test is passed, we can safely refactor XMPPAuction and SniperStateDisplayer
-    private void joinAuction(XMPPConnection connection, String itemId) throws XMPPException {
-    	disconnectWhenUICloses(connection);
+    //Ch16, p.180 revise
+    private void joinAuction(XMPPConnection connection, String itemId) throws Exception {
+    	safelyAddItemToModel(itemId);
         Chat chat = connection.getChatManager().createChat(auctionId(itemId, connection), null);
         this.notTobeGCd = chat;
         
@@ -68,7 +73,16 @@ public class Main {
         auction.join();
     }
     
-    private void disconnectWhenUICloses(final XMPPConnection connection) {
+    //Ch16, p.180
+    private void safelyAddItemToModel(final String itemId) throws Exception {
+        SwingUtilities.invokeAndWait(new Runnable() {
+            public void run() {
+                snipers.addSniper(SniperSnapshot.joining(itemId));
+            }
+        });  
+	}
+
+	private void disconnectWhenUICloses(final XMPPConnection connection) {
     	ui.addWindowListener(new WindowAdapter() {
     		@Override public void windowClosed(WindowEvent e) {
     			connection.disconnect();
