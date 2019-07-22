@@ -100,6 +100,12 @@ public interface SniperListener extends EventListener {
 In this chapter, JLabel is replaced by JTable for better data visibility.
 With the table with details, the **SniperSnapshot** is designed to carry more details bidding information, such as item ID, latest price (of everyone) and latest bid (of sniper).
 
+In previous chapter, bidding data are passing in plaintext-style parameters. But since chapter 15, bidding data (or object) in wrapped into **SniperSnapshot**. Therefore, the entire project of **AuctionSniper** is reformed to embrace **SniperSnapshot**.
+
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch15/auction-sniper-ch15/src/auctionsniper/Ch15_ClassDiagram.jpg)
 
+## Chapter 16
+**TO DO: Multiple Items.**
+
+This chapter is quite nasty because authors only demonstrate main stream implementations. For those related or surrounding codes, I have to dig them out from [sf105](https://github.com/sf105/goos-code).
