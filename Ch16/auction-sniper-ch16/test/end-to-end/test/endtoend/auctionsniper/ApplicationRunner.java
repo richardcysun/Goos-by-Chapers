@@ -18,8 +18,7 @@ public class ApplicationRunner {
 
     //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer... auctions) {
-        //itemId = auction.getItemId();
-        
+    	
         Thread thread = new Thread("Test Application") {
             @Override public void run() {
                 try {
@@ -42,10 +41,17 @@ public class ApplicationRunner {
         driver.hasColumnTitles();
         //if the "Joining" is appeared on Main's UI
         for (FakeAuctionServer auction : auctions) {
-        	driver.showsSniperStatus(auction.getItemId(), 0, 0, SnipersTableModel.textFor(SniperState.JOINING));	
+            final String itemId = auction.getItemId();
+            driver.startBiddingFor(itemId);
+        	driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));	
         }
     }
 
+    //Ch16, p.184
+    private void startSniper() {
+    	
+    }
+    
     //Ch16, p.177
     protected static String[] arguments(FakeAuctionServer... auctions) {
     	String[] arguments = new String[auctions.length + 3];
