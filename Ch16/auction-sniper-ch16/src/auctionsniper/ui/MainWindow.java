@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.TableModel;
 
 import auctionsniper.SniperSnapshot;
 
@@ -31,10 +32,10 @@ public class MainWindow extends JFrame{
     private SnipersTableModel snipers;
 
     //Ch15, p.151, replace JLabel with JTable
-    public MainWindow(SnipersTableModel snipers) {
+    public MainWindow(TableModel snipers) {
         super(APPLICATION_TITLE);
         setName(MainWindow.MAIN_WINDOW_NAME);
-        this.snipers = snipers;
+        //this.snipers = snipers;
         fillContentPane(makeSnipersTable(snipers), makeControls());
         //It shows "Joining" by default
         pack();
@@ -42,12 +43,12 @@ public class MainWindow extends JFrame{
         setVisible(true);
     }
 
-    private Object makeControls() {
+    private JPanel makeControls() {
 		JPanel controls = new JPanel(new FlowLayout());
 		final JTextField itemIdField = new JTextField();
 		
 		itemIdField.setColumns(25);
-		itemIdField.setName(JOIN_BUTTON_NAME);
+		itemIdField.setName(NEW_ITEM_ID_NAME);
 		controls.add(itemIdField);
 		
 		JButton joinAuctionButton = new JButton("join Auction");

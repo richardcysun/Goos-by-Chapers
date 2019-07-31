@@ -21,7 +21,6 @@ public class Main {
     private static final int ARG_HOSTNAME = 0;
     private static final int ARG_USERNAME = 1;
     private static final int ARG_PASSWORD = 2;
-    private static final int ARG_ITEM_ID  = 3;
     
     public static final String AUCTION_RESOURCE = "Auction";
     public static final String ITEM_ID_AS_LOGIN = "auction-%s";
@@ -43,7 +42,7 @@ public class Main {
         //Ch16, p.179
         XMPPConnection connection = connection(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
         main.disconnectWhenUICloses(connection);
-        
+        //Add multiple items
         for (int i = 3; i < args.length; i++) {
             main.joinAuction(connection, args[i]);
         }
@@ -100,14 +99,6 @@ public class Main {
         connection.connect();
         connection.login(username, password, AUCTION_RESOURCE);
         return connection;
-    }
-
-    private void startUserInterface() throws Exception {
-        SwingUtilities.invokeAndWait(new Runnable() {
-            public void run() {
-                ui = new MainWindow(snipers);
-            }
-        });
     }
     
     //Nested class
