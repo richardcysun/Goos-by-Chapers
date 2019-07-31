@@ -3,6 +3,8 @@ package auctionsniper.ui;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,10 +15,15 @@ import javax.swing.JTextField;
 import javax.swing.table.TableModel;
 
 import auctionsniper.SniperSnapshot;
+import auctionsniper.UserRequestListener;
+import auctionsniper.util.Announcer;
 
 //Ch11, p.97, 98, 102
 public class MainWindow extends JFrame{
-
+	//Ch16, p.187
+	private final Announcer<UserRequestListener> userRequests =
+			Announcer.to(UserRequestListener.class);
+	
     public static final String MAIN_WINDOW_NAME = "Auction Sniper Main";
     public static final String SNIPER_STATUS_NAME = "sniper status";    
     public static final String STATUS_JOINING = "Joining";
@@ -32,10 +39,10 @@ public class MainWindow extends JFrame{
     private SnipersTableModel snipers;
 
     //Ch15, p.151, replace JLabel with JTable
-    public MainWindow(TableModel snipers) {
+    public MainWindow(SnipersTableModel snipers) {
         super(APPLICATION_TITLE);
         setName(MainWindow.MAIN_WINDOW_NAME);
-        //this.snipers = snipers;
+        //Ch16, p.185
         fillContentPane(makeSnipersTable(snipers), makeControls());
         //It shows "Joining" by default
         pack();
@@ -53,15 +60,21 @@ public class MainWindow extends JFrame{
 		
 		JButton joinAuctionButton = new JButton("join Auction");
 		joinAuctionButton.setName(JOIN_BUTTON_NAME);
+		
+		joinAuctionButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userRequests.announce().joinAuction(itemIdField.getText());
+			}
+		});
 		controls.add(joinAuctionButton);
 		
 		return controls;
 	}
 
-	private void fillContentPane(JTable snipersTable) {
+	private void fillContentPane(JTable snipersTable, JPanel controls) {
         final Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
-        
+        contentPane.add(controls, BorderLayout.NORTH);
         contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
     }
 
@@ -76,4 +89,9 @@ public class MainWindow extends JFrame{
     public void sniperStateChanged(SniperSnapshot snapshot) {
         snipers.sniperStateChanged(snapshot);
     }
+
+	public void addUserRequestListener(UserRequestListener userReqeustListener) {
+		// TODO Auto-generated method stub
+		
+	}
 }
