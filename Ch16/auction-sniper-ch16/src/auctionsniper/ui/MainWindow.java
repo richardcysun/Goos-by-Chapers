@@ -85,13 +85,13 @@ public class MainWindow extends JFrame{
     }
     
     //Ch15, p.156
-    //CH15, p.167 revised
+    //Ch15, p.167 revised
     public void sniperStateChanged(SniperSnapshot snapshot) {
         snipers.sniperStateChanged(snapshot);
     }
 
+    //Ch16, p.187
 	public void addUserRequestListener(UserRequestListener userReqeustListener) {
-		// TODO Auto-generated method stub
-		
+		userRequests.addListener(userReqeustListener);
 	}
 }
