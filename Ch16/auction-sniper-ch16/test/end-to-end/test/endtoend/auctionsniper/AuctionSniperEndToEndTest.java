@@ -92,11 +92,13 @@ public class AuctionSniperEndToEndTest {
         auction2.hasReceivedBid(521, ApplicationRunner.SNIPER_XMPP_ID); //Step 9   
         holdOn();
         auction.reportPrice(1098, 97, ApplicationRunner.SNIPER_XMPP_ID);  //Step 10
+        holdOn();
         auction2.reportPrice(521, 22, ApplicationRunner.SNIPER_XMPP_ID);  //Step 11
         application.hasShownSniperIsWinning(auction, 1098);  //Step 12
         application.hasShownSniperIsWinning(auction2, 521);  //Step 13
         holdOn();
         auction.announceClosed();              		//Step 14
+        holdOn();
         auction2.announceClosed();                 	//Step 15
         application.showsSniperHasWonAuction(auction, 1098);//Step 16
         application.showsSniperHasWonAuction(auction2, 521);//Step 17

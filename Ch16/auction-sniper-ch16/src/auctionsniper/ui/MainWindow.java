@@ -50,6 +50,7 @@ public class MainWindow extends JFrame{
         setVisible(true);
     }
 
+    //Ch16, p.185
     private JPanel makeControls() {
 		JPanel controls = new JPanel(new FlowLayout());
 		final JTextField itemIdField = new JTextField();

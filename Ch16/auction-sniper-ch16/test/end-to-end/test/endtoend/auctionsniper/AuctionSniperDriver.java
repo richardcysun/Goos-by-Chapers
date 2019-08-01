@@ -9,7 +9,6 @@ import com.objogate.wl.swing.driver.JTextFieldDriver;
 import com.objogate.wl.swing.gesture.GesturePerformer;
 
 import static java.lang.String.valueOf;
-import static org.hamcrest.Matchers.*;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -53,12 +52,14 @@ public class AuctionSniperDriver extends JFrameDriver {
         headers.hasHeaders(matching(withLabelText("Item"), withLabelText("Last Price"), withLabelText("Last Bid"), withLabelText("State")));
     }
 	
+    //Ch16, p.184
 	private JTextFieldDriver itemIdField() {
 		JTextFieldDriver newItemId = new JTextFieldDriver(this, JTextField.class, named(MainWindow.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
 		return newItemId;
 	}
 	
+	//Ch16, p.184
 	private JButtonDriver bidButton() {
 		return new JButtonDriver(this, JButton.class, named(MainWindow.JOIN_BUTTON_NAME));
 	}
