@@ -108,4 +108,11 @@ In previous chapter, bidding data are passing in plaintext-style parameters. But
 ## Chapter 16
 **TO DO: Multiple Items.**
 
-This chapter is quite nasty because authors only demonstrate main stream implementations. For those related or surrounding codes, I have to dig them out from [sf105](https://github.com/sf105/goos-code).
+This chapter is getting quite nasty because authors only demonstrate primary implementations. For those related or surrounding codes, I have to dig them out from [sf105](https://github.com/sf105/goos-code), such as class Announcer.
+
+Since the authors intend to put multiple items on auction house, the first thing they do is to elaborate an integration test to ensure MainWindow can accompish a "Join Auction" work. Meanwhile, more unit tests for MainWindow are created because GUI experieces are enriched.
+
+Overall, the core of this chapter is create better user experieces and start up with more tests on UI.
+
+### Class Diagram of Source Codes
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch16/auction-sniper-ch16/src/auctionsniper/Ch16_ClassDiagram.jpg)
