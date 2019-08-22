@@ -1,7 +1,10 @@
 package auctionsniper;
 
+import java.util.EventListener;
+
 //Ch12, p.119
-public interface AuctionEventListener {
+//Ch17, p.193, should add extends but not mentioned in the book
+public interface AuctionEventListener extends EventListener {
     enum PriceSource {
         FromSniper, FromOtherBidder;
     };
