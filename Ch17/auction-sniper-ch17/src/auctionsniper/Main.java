@@ -34,7 +34,7 @@ public class Main {
 
     public static void main(String... args) throws Exception {
         Main main = new Main();
-        //Ch17, p.
+        //Ch17, p.196
         XMPPAuctionHouse auctionHouse = XMPPAuctionHouse.connect(args[ARG_HOSTNAME], args[ARG_USERNAME], args[ARG_PASSWORD]);
         main.disconnectWhenUICloses(auctionHouse);
         main.addUserRequestListenerFor(auctionHouse);

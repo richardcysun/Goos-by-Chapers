@@ -6,6 +6,8 @@ import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
 
+//Entire class are not in the book, it's only mentioned in p.197 and says 
+//"Implemneting XMPPAuctionHouse is straightforward..."
 public class XMPPAuctionHouse implements AuctionHouse{
 	public static final String AUCTION_RESOURCE = "Auction";
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
