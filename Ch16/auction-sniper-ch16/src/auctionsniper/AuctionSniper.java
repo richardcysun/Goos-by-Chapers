@@ -1,23 +1,26 @@
 package auctionsniper;
 
+import java.util.logging.Logger;
+
 //Ch13, p.124
 public class AuctionSniper implements AuctionEventListener{
     private final Auction auction;
     private final SniperListener sniperListener;
     private SniperSnapshot snapshot;
+    private Logger logger = Logger.getLogger("MyLog");
     
     public AuctionSniper(String itemId, Auction auction, SniperListener sniperListener) {
         this.auction = auction;
         this.sniperListener = sniperListener;
         this.snapshot = SniperSnapshot.joining(itemId);
-        System.out.println(snapshot);
+        logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
     }
     
     //Ch14, p.147 revised
     //Ch15, p.164 revised
     public void auctionClosed() {
         snapshot = snapshot.closed();
-        System.out.println(snapshot);
+        logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
         notifyChange();
     }
     
@@ -27,13 +30,13 @@ public class AuctionSniper implements AuctionEventListener{
         switch(priceSource) {
         case FromSniper:
             snapshot = snapshot.winning(price);
-            System.out.println(snapshot);
+            logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
             break;
         case FromOtherBidder:
             int bid = price + increment;
             auction.bid(bid);
             snapshot = snapshot.bidding(price, bid);
-            System.out.println(snapshot);
+            logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
             break;
         }
         notifyChange();
