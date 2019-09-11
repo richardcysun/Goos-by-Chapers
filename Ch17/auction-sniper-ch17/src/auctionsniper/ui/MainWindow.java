@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.TableModel;
 
+import auctionsniper.SniperPortfolio;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.UserRequestListener;
 import auctionsniper.util.Announcer;
@@ -37,13 +37,14 @@ public class MainWindow extends JFrame{
 	public static final String NEW_ITEM_ID_NAME = "Item Id";
     
     private SnipersTableModel snipers;
-
+    
     //Ch15, p.151, replace JLabel with JTable
-    public MainWindow(SnipersTableModel snipers) {
+    //Ch17, not in the book, replace SnipersTableModel with SniperPortfolio
+    public MainWindow(SniperPortfolio portfolio) {
         super(APPLICATION_TITLE);
         setName(MainWindow.MAIN_WINDOW_NAME);
         //Ch16, p.185
-        fillContentPane(makeSnipersTable(snipers), makeControls());
+        fillContentPane(makeSnipersTable(portfolio), makeControls());
         //It shows "Joining" by default
         pack();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +55,6 @@ public class MainWindow extends JFrame{
     private JPanel makeControls() {
 		JPanel controls = new JPanel(new FlowLayout());
 		final JTextField itemIdField = new JTextField();
-		
 		itemIdField.setColumns(25);
 		itemIdField.setName(NEW_ITEM_ID_NAME);
 		controls.add(itemIdField);
@@ -68,7 +68,6 @@ public class MainWindow extends JFrame{
 			}
 		});
 		controls.add(joinAuctionButton);
-		
 		return controls;
 	}
 
@@ -79,8 +78,11 @@ public class MainWindow extends JFrame{
         contentPane.add(new JScrollPane(snipersTable), BorderLayout.CENTER);
     }
 
-    private JTable makeSnipersTable(SnipersTableModel snipers) {
-        final JTable snipersTable = new JTable(snipers);
+	//Ch17, p.199 revise
+    private JTable makeSnipersTable(SniperPortfolio portfolio) {
+    	SnipersTableModel model = new SnipersTableModel();
+    	portfolio.addPortfolioListener(model);
+        final JTable snipersTable = new JTable(model);
         snipersTable.setName(SNIPER_TABLE_NAME);
         return snipersTable;
     }

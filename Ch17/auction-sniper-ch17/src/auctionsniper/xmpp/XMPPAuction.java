@@ -9,7 +9,7 @@ import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionMessageTranslator;
 import auctionsniper.util.Announcer;
 
-import static auctionsniper.Main.AUCTION_ID_FORMAT;
+import static auctionsniper.xmpp.XMPPAuctionHouse.AUCTION_ID_FORMAT;
 
 //Ch17, p.193, most codes are not in the book
 public class XMPPAuction implements Auction{

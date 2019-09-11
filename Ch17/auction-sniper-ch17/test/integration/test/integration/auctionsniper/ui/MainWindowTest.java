@@ -1,5 +1,6 @@
 package test.integration.auctionsniper.ui;
 
+import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
@@ -13,8 +14,9 @@ import static org.hamcrest.Matchers.*;
 
 //Ch16, p.186
 public class MainWindowTest {
-	private final SnipersTableModel tableModel = new SnipersTableModel();
-	private final MainWindow mainWindow = new MainWindow(tableModel);
+	//Ch17, not in the book
+	private final SniperPortfolio portfolio = new SniperPortfolio(); 
+	private final MainWindow mainWindow = new MainWindow(portfolio);
 	private final AuctionSniperDriver driver = new AuctionSniperDriver(100);
 	
 	@Test public void makesUserRequestWhenJoinButtonClicked() {
