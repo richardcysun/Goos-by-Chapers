@@ -109,7 +109,6 @@ public class AuctionSniperTest {
     }
     
     @Test public void reportsLostIfAuctionClosesWhenBidding() {
-        System.out.println("reportsLostIfAuctionClosesWhenBidding >>");
         context.checking(new Expectations() {
             {
                 ignoring(auction);
@@ -127,7 +126,6 @@ public class AuctionSniperTest {
         //In the case of BIDDING, auctionClosed() triggers LOST!
         //Therefore, in above atLeast(1), only SniperSnapshot(ITEM_ID, 123, 168, LOST) can pass the test        
         sniper.auctionClosed();
-        System.out.println("reportsLostIfAuctionClosesWhenBidding <<");
     }    
     
     //Ch15, p.161

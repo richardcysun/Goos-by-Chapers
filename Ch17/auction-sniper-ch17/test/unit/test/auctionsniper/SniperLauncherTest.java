@@ -1,9 +1,7 @@
 package test.auctionsniper;
 
-import java.util.regex.Matcher;
-
 import org.hamcrest.FeatureMatcher;
-import org.hamcrest.Matchers;
+import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.States;
@@ -18,9 +16,7 @@ import auctionsniper.SniperCollector;
 import auctionsniper.SniperLauncher;
 
 import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.equalTo;
 
-/*
 //Ch17, p.198
 @RunWith(JMock.class)
 public class SniperLauncherTest {
@@ -37,12 +33,12 @@ public class SniperLauncherTest {
 		context.checking(new Expectations() {
 			{
 				allowing(auctionHouse).auctionFor(itemId); will(returnValue(auction));
-				oneOf(auction).AddAuctionEventListener(with(sniperForItem(itemId)));
+				oneOf(auction).addAuctionEventListener(with(sniperForItem(itemId)));
 					when(auctionState.is("not joined"));
 				oneOf(sniperCollector).addSniper(with(sniperForItem(itemId)));
 					when(auctionState.is("not joined"));
 				one(auction).join();
-				when(auctionState.is("joined"));
+					then(auctionState.is("joined"));
 			}
 		});
 		
@@ -59,4 +55,4 @@ public class SniperLauncherTest {
 	      }
 	    };
 	}
-}*/
+}
