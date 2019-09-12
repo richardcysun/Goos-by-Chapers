@@ -10,7 +10,6 @@ import auctionsniper.xmpp.XMPPAuctionHouse;
 
 //Ch13, p.125 replace AuctionEventListener with SniperListener
 public class Main {
-    @SuppressWarnings("unused") private Auction notTobeGCd;
     //Ch17, p.200
     //private final SnipersTableModel snipers = new SnipersTableModel();
     private final SniperPortfolio portfolio = new SniperPortfolio();

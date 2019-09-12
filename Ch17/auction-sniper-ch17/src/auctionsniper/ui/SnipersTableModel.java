@@ -16,7 +16,6 @@ import auctionsniper.SniperState;
 //Ch15, p.158, revised
 //Ch17, revised, not in the book
 public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener {
-	private final ArrayList<AuctionSniper> notToBeGCD = new ArrayList<AuctionSniper>();
     private static String[] STATUS_TEXT = {
             "Joining", "Bidding", "Winning", "Lost", "Won"
     };
