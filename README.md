@@ -116,3 +116,12 @@ Overall, the core of this chapter is create better user experieces and start up 
 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch16/auction-sniper-ch16/src/auctionsniper/Ch16_ClassDiagram.jpg)
+
+## Chapter 17
+**TO DO: Add new items through the GUI.**
+
+For the perspective of code development, this chapter is very difficult because most codes are not in the book. Readers must fill in the gap on their own, [sf105](https://github.com/sf105/goos-code) is a good reference, but readers still have to tweak them because sf105 is the final work of this book.
+
+The most important value of this chapter is source code refactoring. In the Chapter 16, class Main tightly manages XMPP connection, Chat room listener and GUI messages. In this chapter, class XMPPAuctionHouse manages XMPP connection, class XMPPAuction handles Chat room, and class SnipersTableModel output messages to GUI.
+
+Authors call above improvement as "incremental Architecture" by "Three-Point Contact" (三點不動一點動的攀岩技巧) skill.
