@@ -17,7 +17,7 @@ import auctionsniper.SniperState;
 //Ch17, revised, not in the book
 public class SnipersTableModel extends AbstractTableModel implements SniperListener, PortfolioListener {
     private static String[] STATUS_TEXT = {
-            "Joining", "Bidding", "Winning", "Lost", "Won"
+            "Joining", "Bidding", "Winning", "Losing", "Lost", "Won"
     };
     
     //Copy snapshots and revise getRowCount(), getValueAt(), sniperStateChanged() and addSniper()

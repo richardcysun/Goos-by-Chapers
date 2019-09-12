@@ -22,12 +22,17 @@ public class ApplicationRunner {
         
     	for (FakeAuctionServer auction : auctions) {
     		final String itemId = auction.getItemId();
-    		driver.startBiddingFor(itemId);
+    		driver.startBiddingFor(itemId, 789);
     		driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
     	}
-        
     }
 
+    //Ch18, not in the book
+	public void startBiddingWithStopPrice(FakeAuctionServer auction, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	
     //Ch16, p.184
     private void startSniper(final FakeAuctionServer... auctions) {
         Thread thread = new Thread("Test Application") {
@@ -82,6 +87,11 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid, MainWindow.STATUS_BIDDING);
 	}
 
+	//Ch18, not in the book
+	public void hasShownSniperIsLosing(FakeAuctionServer auction, int lastPrice, int lastBid) {
+		driver.showsSniperStatus(auction.getItemId(), lastPrice, lastBid, MainWindow.STATUS_LOSING);
+	}
+	
     public void hasShownSniperIsWinning(FakeAuctionServer auction, int winningBid) {
         driver.showsSniperStatus(auction.getItemId(), winningBid, winningBid, MainWindow.STATUS_WINNING);
     }

@@ -17,16 +17,20 @@ import javax.swing.table.JTableHeader;
 import static com.objogate.wl.swing.matcher.JLabelTextMatcher.withLabelText;
 import static com.objogate.wl.swing.matcher.IterableComponentsMatcher.matching;
 
-//import auctionsniper.Main;
 import auctionsniper.ui.MainWindow;
+
+import static auctionsniper.ui.MainWindow.NEW_ITEM_ID_NAME;
+import static auctionsniper.ui.MainWindow.NEW_ITEM_STOP_PRICE_NAME;
 
 //Ch11, p.91
 //extends means inherit
 //super is a bit similar to this, but it can call father class interface 
 public class AuctionSniperDriver extends JFrameDriver {
 	@SuppressWarnings("unchecked")
-	public void startBiddingFor(String itemId) {
-		itemIdField().replaceAllText(itemId);
+	public void startBiddingFor(String itemId, int stopPrice) {
+		//Ch18, p. revise
+		textField(NEW_ITEM_ID_NAME).replaceAllText(itemId);
+		textField(NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice));
 		bidButton().click();
 	}
 	
@@ -53,14 +57,21 @@ public class AuctionSniperDriver extends JFrameDriver {
     }
 	
     //Ch16, p.184
-	private JTextFieldDriver itemIdField() {
+	/*private JTextFieldDriver itemIdField() {
 		JTextFieldDriver newItemId = new JTextFieldDriver(this, JTextField.class, named(MainWindow.NEW_ITEM_ID_NAME));
 		newItemId.focusWithMouse();
 		return newItemId;
-	}
+	}*/
 	
 	//Ch16, p.184
 	private JButtonDriver bidButton() {
 		return new JButtonDriver(this, JButton.class, named(MainWindow.JOIN_BUTTON_NAME));
 	}
+	
+    //Ch18, not in the book
+	private JTextFieldDriver textField(String fieldName) {
+		JTextFieldDriver newItemId = new JTextFieldDriver(this, JTextField.class, named(fieldName));
+		newItemId.focusWithMouse();
+		return newItemId;
+	}	
 }
