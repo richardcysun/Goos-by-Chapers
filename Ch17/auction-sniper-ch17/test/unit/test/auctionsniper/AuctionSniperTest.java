@@ -18,6 +18,9 @@ import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
 
 import static org.hamcrest.Matchers.*;
+
+import java.util.logging.Logger;
+
 import static auctionsniper.SniperState.BIDDING;
 import static auctionsniper.SniperState.WINNING;
 import static auctionsniper.SniperState.LOST;
@@ -33,7 +36,8 @@ public class AuctionSniperTest {
     private final Auction auction = context.mock(Auction.class);
     private AuctionSniper sniper = new AuctionSniper(ITEM_ID, auction); 
     private final States sniperState = context.states("sniper");
-
+    private final Logger logger = Logger.getLogger("MyLog");
+    
     //Ch17, not in the book
     @Before public void addSniper()
     {
@@ -41,7 +45,7 @@ public class AuctionSniperTest {
     }
     
     @Test public void reportsLostWhenAuctionCloses() {
-        System.out.println("reportsLostWhenAuctionCloses >>");
+        logger.info(">>>");
         context.checking(new Expectations() {
             {
                 one(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 0, 0, LOST));                   
@@ -50,7 +54,7 @@ public class AuctionSniperTest {
         //This auctionClosed() triggers SniperSnapshot(itemId=item-id,lastPrice=0,lastBid=0,state=LOST)
         //because the initial state is JOINING!
         sniper.auctionClosed();
-        System.out.println("reportsLostWhenAuctionCloses <<");
+        logger.info("<<<");
     }
     
     //Ch13, p.127
@@ -58,7 +62,7 @@ public class AuctionSniperTest {
         final int price = 1001;
         final int increment = 25;
         final int bid = price + increment;
-        System.out.println("bidsHigherAndReportsBiddingWhenNewPriceArrives >>");
+        logger.info(">>>");
         context.checking(new Expectations() {
             {
                 one(auction).bid(bid);
@@ -69,13 +73,13 @@ public class AuctionSniperTest {
         });
         //Due to FromOtherBidder, AuctionSniper bids higher price 
         sniper.currentPrice(price, increment, PriceSource.FromOtherBidder);
-        System.out.println("bidsHigherAndReportsBiddingWhenNewPriceArrives <<");
+        logger.info("<<<");
     }
     
     //Ch14, p.143
     //CH15, p.162 revised
     @Test public void reportsIsWinningWhenCurrentPriceComesFromSniper() {
-        System.out.println("reportsIsWinningWhenCurrentPriceComesFromSniper >>");
+    	logger.info(">>>");
         context.checking(new Expectations() {
             {
                 ignoring(auction);
@@ -91,12 +95,12 @@ public class AuctionSniperTest {
         sniper.currentPrice(123, 12, PriceSource.FromOtherBidder);
         //This currentPrice() from AuctionSniper creates SniperSnapshot(itemId=item-id,lastPrice=135,lastBid=135,state=WINNING)
         sniper.currentPrice(135, 45, PriceSource.FromSniper);
-        System.out.println("reportsIsWinningWhenCurrentPriceComesFromSniper <<");
+        logger.info("<<<");
     }
     
     //Ch14, p.145
     @Test public void reportsLostIfAuctionClosesImmediately() {
-        System.out.println("reportsLostIfAuctionClosesImmediately >>");
+    	logger.info(">>>");
         context.checking(new Expectations() {
             {
                 atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 0, 0, LOST));  
@@ -105,7 +109,7 @@ public class AuctionSniperTest {
         //This auctionClosed() triggers SniperSnapshot(itemId=item-id,lastPrice=0,lastBid=0,state=LOST)
         //because the initial state is JOINING!        
         sniper.auctionClosed();
-        System.out.println("reportsLostIfAuctionClosesImmediately <<");
+        logger.info("<<<");
     }
     
     @Test public void reportsLostIfAuctionClosesWhenBidding() {
@@ -142,7 +146,7 @@ public class AuctionSniperTest {
 
     //Ch14, p.147
     @Test public void reportsWonIfAuctionClosesWhenWinning() {
-        System.out.println("reportsWonIfAuctionClosesWhenWinning >>");
+    	logger.info(">>>");
         context.checking(new Expectations() {
             {
                 ignoring(auction);
@@ -158,6 +162,6 @@ public class AuctionSniperTest {
         //In the case of WINNING, auctionClosed() triggers WON!
         //Therefore, in above atLeast(1), only SniperSnapshot(ITEM_ID, 123, 0, WON) can pass the test
         sniper.auctionClosed();
-        System.out.println("reportsWonIfAuctionClosesWhenWinning <<");
+        logger.info("<<<");
     }        
 }
