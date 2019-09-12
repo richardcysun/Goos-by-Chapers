@@ -125,3 +125,6 @@ For the perspective of code development, this chapter is very difficult because 
 The most important value of this chapter is source code refactoring. In the Chapter 16, class Main tightly manages XMPP connection, Chat room listener and GUI messages. In this chapter, class XMPPAuctionHouse manages XMPP connection, class XMPPAuction handles Chat room, and class SnipersTableModel output messages to GUI.
 
 Authors call above improvement as "incremental Architecture" by "Three-Point Contact" (三點不動一點動的攀岩技巧) skill.
+
+### Class Diagram of Source Codes
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch17/auction-sniper-ch17/src/auctionsniper/Ch17_ClassDiagram.jpg)
