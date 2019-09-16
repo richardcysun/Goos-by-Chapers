@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.AuctionSniper;
+import auctionsniper.Item;
 import auctionsniper.SniperListener;
 import auctionsniper.SniperSnapshot;
 import auctionsniper.SniperState;
@@ -23,18 +24,21 @@ import java.util.logging.Logger;
 
 import static auctionsniper.SniperState.BIDDING;
 import static auctionsniper.SniperState.WINNING;
+import static auctionsniper.SniperState.LOSING;
 import static auctionsniper.SniperState.LOST;
 import static auctionsniper.SniperState.WON;
 
 //Ch13, p.124
 @RunWith(JMock.class)
 public class AuctionSniperTest {
-    private final String ITEM_ID = "item-id";
+    private static final String ITEM_ID = "item-id";
+    public static final Item ITEM = new Item(ITEM_ID, 1234);
     private final Mockery context = new Mockery();
     //SniperListener is an interface, be noticed
     private final SniperListener sniperListener = context.mock(SniperListener.class);
     private final Auction auction = context.mock(Auction.class);
-    private AuctionSniper sniper = new AuctionSniper(ITEM_ID, auction); 
+    //Ch18, revised, not in the book
+    private AuctionSniper sniper = new AuctionSniper(ITEM, auction); 
     private final States sniperState = context.states("sniper");
     private final Logger logger = Logger.getLogger("MyLog");
     
@@ -163,5 +167,31 @@ public class AuctionSniperTest {
         //Therefore, in above atLeast(1), only SniperSnapshot(ITEM_ID, 123, 0, WON) can pass the test
         sniper.auctionClosed();
         logger.info("<<<");
-    }        
+    }     
+    
+    //Ch18, p.210
+    @Test public void doesNotBidAndReportsLosingIfSubsequentPriceIsAboveStopPrice() {
+    	logger.info(">>>");
+    	allowingSniperBidding();
+    	context.checking(new Expectations() {
+    		{
+    			int bid = 123 + 45;
+    			allowing(auction).bid(bid);
+    			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 2345, bid, LOSING));
+    				when(sniperState.is("bidding"));
+    		}
+    	});
+    	sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+    	sniper.currentPrice(2345, 25, PriceSource.FromOtherBidder);
+    	logger.info("<<<");
+    }
+    
+    private void allowingSniperBidding() {
+    	context.checking(new Expectations() {
+    		{
+    			allowing(sniperListener).sniperStateChanged(with(aSniperThatIs(BIDDING)));
+    				then(sniperState.is("bidding"));
+    		}
+    	});
+    }
 }

@@ -26,7 +26,6 @@ public class SniperSnapshot {
     }
     
     //With toString(), it can dump details of SniperSnapshot, it's very helpful to trace details with
-    //System.out.println(snapshot);
     @Override
     public String toString() {
       return ToStringBuilder.reflectionToString(this);
@@ -40,6 +39,11 @@ public class SniperSnapshot {
     //Ch15, p.156    
     public SniperSnapshot winning(int newLastPrice) {
         return new SniperSnapshot(itemId, newLastPrice, lastBid, SniperState.WINNING);
+    }
+    
+    //Ch18, p.211    
+    public SniperSnapshot losing(int newLastPrice) {
+        return new SniperSnapshot(itemId, newLastPrice, lastBid, SniperState.LOSING);
     }
     
     //Ch15, p.156    

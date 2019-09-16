@@ -7,11 +7,14 @@ public class AuctionSniper implements AuctionEventListener{
     private final Auction auction;
     private SniperListener sniperListener;
     private SniperSnapshot snapshot;
+    //Ch18, not in the book
+    private Item item;
     private Logger logger = Logger.getLogger("MyLog");
     
-    public AuctionSniper(String itemId, Auction auction) {
+    public AuctionSniper(Item item, Auction auction) {
         this.auction = auction;
-        this.snapshot = SniperSnapshot.joining(itemId);
+        this.item = item;
+        this.snapshot = SniperSnapshot.joining(item.identifier);
         logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
     }
     
@@ -33,9 +36,16 @@ public class AuctionSniper implements AuctionEventListener{
             break;
         case FromOtherBidder:
             int bid = price + increment;
-            auction.bid(bid);
-            snapshot = snapshot.bidding(price, bid);
-            logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
+            if (item.allowsBid(bid))
+            {           	
+            	auction.bid(bid);
+            	snapshot = snapshot.bidding(price, bid);
+            }
+            else
+            {
+            	snapshot = snapshot.losing(price);
+            }
+            logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));            
             break;
         }
         notifyChange();

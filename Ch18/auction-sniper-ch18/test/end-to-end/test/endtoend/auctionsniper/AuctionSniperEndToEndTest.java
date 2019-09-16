@@ -16,7 +16,7 @@ public class AuctionSniperEndToEndTest {
             e.printStackTrace(); 
         }   
     }
-    
+
     //Ch10, p.85
     @Test public void sniperJoinsAuctionUntilAuctionCloses() throws Exception {
         auction.startSellingItem();                 //Step 1
@@ -104,8 +104,8 @@ public class AuctionSniperEndToEndTest {
         application.showsSniperHasWonAuction(auction2, 521);//Step 17
         holdOn();
     }
-    
-    //Ch 18, p.
+
+    //Ch18, p.206
     @Test public void sniperLosesAnAuctionWhenThePriceIsTooHigh() throws Exception {
     	auction.startSellingItem();                 			//Step 1
     	application.startBiddingWithStopPrice(auction, 1100);	//Step 2

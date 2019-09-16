@@ -26,9 +26,9 @@ import static auctionsniper.ui.MainWindow.NEW_ITEM_STOP_PRICE_NAME;
 //extends means inherit
 //super is a bit similar to this, but it can call father class interface 
 public class AuctionSniperDriver extends JFrameDriver {
-	@SuppressWarnings("unchecked")
+	//@SuppressWarnings("unchecked")
 	public void startBiddingFor(String itemId, int stopPrice) {
-		//Ch18, p. revise
+		//Ch18, p.207 revise
 		textField(NEW_ITEM_ID_NAME).replaceAllText(itemId);
 		textField(NEW_ITEM_STOP_PRICE_NAME).replaceAllText(String.valueOf(stopPrice));
 		bidButton().click();

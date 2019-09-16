@@ -13,10 +13,11 @@ public class SniperLauncher implements UserRequestListener{
 	
 	//This is a funny function, the original implementation in p.197 is improper, 
 	//then authors change it right away in p.198
-	public void joinAuction(String itemId)
+	public void joinAuction(Item item)
 	{
-		Auction auction = auctionHouse.auctionFor(itemId);	
-		AuctionSniper sniper = new AuctionSniper(itemId, auction);
+		//Ch18, not in the book
+		Auction auction = auctionHouse.auctionFor(item.identifier);	
+		AuctionSniper sniper = new AuctionSniper(item, auction);
 		auction.addAuctionEventListener(sniper);
 
 		collector.addSniper(sniper);

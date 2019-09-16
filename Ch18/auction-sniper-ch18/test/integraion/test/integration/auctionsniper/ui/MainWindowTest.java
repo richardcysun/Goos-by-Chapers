@@ -1,9 +1,9 @@
 package test.integration.auctionsniper.ui;
 
+import auctionsniper.Item;
 import auctionsniper.SniperPortfolio;
 import auctionsniper.UserRequestListener;
 import auctionsniper.ui.MainWindow;
-import auctionsniper.ui.SnipersTableModel;
 
 import org.junit.Test;
 
@@ -19,17 +19,18 @@ public class MainWindowTest {
 	private final MainWindow mainWindow = new MainWindow(portfolio);
 	private final AuctionSniperDriver driver = new AuctionSniperDriver(100);
 	
+	//Ch18, p.209 replace String with Item  
 	@Test public void makesUserRequestWhenJoinButtonClicked() {
-		final ValueMatcherProbe<String> buttonProbe = 
-				new ValueMatcherProbe<String>(equalTo("an item-id"), "join request");
+		final ValueMatcherProbe<Item> itemProbe = 
+				new ValueMatcherProbe<Item>(equalTo(new Item("an item-id", 789)), "item request");
 		mainWindow.addUserRequestListener(
 				new UserRequestListener() {
-					public void joinAuction(String itemId) {
-						buttonProbe.setReceivedValue(itemId);
+					public void joinAuction(Item item) {
+						itemProbe.setReceivedValue(item);
 					}
 				});
 		
 		driver.startBiddingFor("an item-id", 789);
-		driver.check(buttonProbe);
+		driver.check(itemProbe);
 	}
 }

@@ -22,15 +22,19 @@ public class ApplicationRunner {
         
     	for (FakeAuctionServer auction : auctions) {
     		final String itemId = auction.getItemId();
-    		driver.startBiddingFor(itemId, 789);
+    		//The stop price must be larger than any test value, otherwise it will break previous tests
+    		driver.startBiddingFor(itemId, 10000);
     		driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
     	}
     }
 
     //Ch18, not in the book
-	public void startBiddingWithStopPrice(FakeAuctionServer auction, int i) {
-		// TODO Auto-generated method stub
-		
+	public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
+    	startSniper();
+        
+   		final String itemId = auction.getItemId();
+   		driver.startBiddingFor(itemId, stopPrice);
+   		driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
 	}
 	
     //Ch16, p.184
