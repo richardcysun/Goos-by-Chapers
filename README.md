@@ -128,3 +128,12 @@ Authors call above improvement as "incremental Architecture" by "Three-Point Con
 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch17/auction-sniper-ch17/src/auctionsniper/Ch17_ClassDiagram.jpg)
+
+## Chapter 18
+**TO DO: Stop bidding at stop price.**
+In case the bidding price raising unlimitedly, a stop price is introduced in this chapter.
+In previous chapters, item identifiers are kept in a String. In this chapter, class Item holds both identifier and stop price.
+Once the last price from other bidder is higher than stop price, Auction Sniper judges this auction has lost.
+
+### Class Diagram of Source Codes
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch18/auction-sniper-ch18/src/auctionsniper/Ch18_ClassDiagram.jpg)
