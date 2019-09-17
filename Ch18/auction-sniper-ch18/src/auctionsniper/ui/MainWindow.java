@@ -64,7 +64,7 @@ public class MainWindow extends JFrame{
 		itemIdField.setColumns(15);
 		itemIdField.setName(NEW_ITEM_ID_NAME);
 		controls.add(itemIdField);
-		stopPriceField.setColumns(20);
+		stopPriceField.setColumns(10);
 		stopPriceField.setName(NEW_ITEM_STOP_PRICE_NAME);
 		controls.add(stopPriceField);
 		
@@ -82,8 +82,9 @@ public class MainWindow extends JFrame{
 			}
 			//Ch18, p.210
 			private int stopPrice() {
-				int val = Integer.valueOf(stopPriceField.getText());
-				return val;
+				//Below LoC mentioned in book causes exception, so I rewrite it in alternative way
+				//return ((Number)stopPriceField.getValue()).intValue();
+				return Integer.valueOf(stopPriceField.getText());
 			}
 		});
 		controls.add(joinAuctionButton);

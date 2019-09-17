@@ -36,16 +36,18 @@ public class AuctionSniper implements AuctionEventListener{
             break;
         case FromOtherBidder:
             int bid = price + increment;
+            logger.info(String.format("Stop price: %d", item.stopPrice));
             if (item.allowsBid(bid))
             {           	
             	auction.bid(bid);
             	snapshot = snapshot.bidding(price, bid);
+            	logger.info(String.format("Allow bid Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
             }
             else
             {
             	snapshot = snapshot.losing(price);
-            }
-            logger.info(String.format("Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));            
+            	logger.info(String.format("Deny bid Item: %s, Last Price: %s, Last Bid: %s, State: %s", snapshot.itemId, snapshot.lastPrice, snapshot.lastBid, snapshot.state.toString()));
+            }            
             break;
         }
         notifyChange();
