@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.3" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.3" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
+  router="FAN">  
   <class id="1" language="java" name="auctionsniper.Main.XMPPAuction" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="898" y="545"/>    
+    <position height="-1" width="-1" x="825" y="369"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="auctionsniper.Main" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1106" y="863"/>    
+    <position height="-1" width="-1" x="1024" y="659"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +22,7 @@
   </class>  
   <class id="3" language="java" name="auctionsniper.Main.SwingThreadSniperListener" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/Main.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1207" y="546"/>    
+    <position height="-1" width="-1" x="1062" y="368"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +31,7 @@
   </class>  
   <interface id="4" language="java" name="auctionsniper.SniperListener" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/SniperListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1421" y="245"/>    
+    <position height="-1" width="-1" x="1201" y="85"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +40,7 @@
   </interface>  
   <class id="5" language="java" name="auctionsniper.AuctionSniper" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/AuctionSniper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="603" y="427"/>    
+    <position height="-1" width="-1" x="552" y="318"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +49,7 @@
   </class>  
   <class id="6" language="java" name="auctionsniper.SniperSnapshot" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/SniperSnapshot.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="608" y="744"/>    
+    <position height="-1" width="-1" x="513" y="655"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +58,7 @@
   </class>  
   <enumeration id="7" language="java" name="auctionsniper.SniperState" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/SniperState.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="672" y="1048"/>    
+    <position height="-1" width="-1" x="486" y="937"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +67,7 @@
   </enumeration>  
   <interface id="8" language="java" name="auctionsniper.Auction" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/Auction.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="749" y="215"/>    
+    <position height="-1" width="-1" x="690" y="79"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +76,7 @@
   </interface>  
   <class id="9" language="java" name="auctionsniper.AuctionMessageTranslator" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/AuctionMessageTranslator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="253" y="468"/>    
+    <position height="-1" width="-1" x="200" y="285"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +86,7 @@
   <class id="10" language="java" name="auctionsniper.AuctionMessageTranslator.AuctionEvent" 
     project="auction-sniper-ch16" file="/auction-sniper-ch16/src/auctionsniper/AuctionMessageTranslator.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="224" y="737"/>    
+    <position height="-1" width="-1" x="203" y="558"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +95,7 @@
   </class>  
   <interface id="11" language="java" name="auctionsniper.AuctionEventListener" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/AuctionEventListener.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="364" y="206"/>    
+    <position height="-1" width="-1" x="371" y="90"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -104,7 +105,7 @@
   <enumeration id="12" language="java" name="auctionsniper.AuctionEventListener.PriceSource" 
     project="auction-sniper-ch16" file="/auction-sniper-ch16/src/auctionsniper/AuctionEventListener.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="109" y="311"/>    
+    <position height="-1" width="-1" x="114" y="98"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -113,7 +114,7 @@
   </enumeration>  
   <class id="13" language="java" name="auctionsniper.ui.MainWindow" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/ui/MainWindow.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="904" y="1450"/>    
+    <position height="-1" width="-1" x="853" y="1210"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -122,7 +123,7 @@
   </class>  
   <class id="14" language="java" name="auctionsniper.ui.SnipersTableModel" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/ui/SnipersTableModel.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1266" y="1415"/>    
+    <position height="-1" width="-1" x="1210" y="1042"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -131,7 +132,7 @@
   </class>  
   <class id="15" language="java" name="auctionsniper.util.Announcer" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/util/Announcer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1166" y="1772"/>    
+    <position height="-1" width="-1" x="1192" y="1308"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -140,7 +141,7 @@
   </class>  
   <enumeration id="16" language="java" name="auctionsniper.ui.Column" project="auction-sniper-ch16" 
     file="/auction-sniper-ch16/src/auctionsniper/ui/Column.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="214" width="210" x="439" y="1530"/>    
+    <position height="-1" width="-1" x="492" y="1169"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -151,120 +152,164 @@
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </nesting>  
-  <association id="18">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="19" name="snipers"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="21">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="10"/>  
-  </nesting>  
-  <association id="22">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="23" name="snipers"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="25">    
+  <realization id="18">    
     <end type="SOURCE" refId="5"/>    
     <end type="TARGET" refId="11"/>  
   </realization>  
-  <association id="26">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="27" name="snapshot"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+  <association id="19">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="20" name="userRequests">        
+        <position height="0" width="0" x="26" y="-464"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="26" y="-464"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="30" name="state"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
+  <association id="22">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="23" name="snipers">        
+        <position height="0" width="0" x="-56" y="-373"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-56" y="-373"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="33" name="listener"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="35">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="36">    
+  <association id="25">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="37" name="ui"/>      
-      <multiplicity id="38" minimum="0" maximum="1"/>    
+      <attribute id="26" name="ui">        
+        <position height="0" width="0" x="-51" y="-240"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-51" y="-240"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="13" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="39">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="40" name="delegate"/>      
-      <multiplicity id="41" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="42">    
+  <association id="28">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="43" name="auction"/>      
-      <multiplicity id="44" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="45">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="12"/>  
-  </nesting>  
-  <realization id="46">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="47">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="48" name="sniperListener"/>      
-      <multiplicity id="49" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="50">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <nesting id="51">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
-  </nesting>  
-  <association id="52">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="53" name="snapshots"/>      
-      <multiplicity id="54" minimum="0" maximum="2147483647"/>    
+      <attribute id="29" name="snapshot">        
+        <position height="0" width="0" x="-95" y="-89"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-95" y="-89"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="55">    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="56" name="userRequests"/>      
-      <multiplicity id="57" minimum="0" maximum="1"/>    
+  <nesting id="31">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <realization id="32">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="33">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="34" name="snipers">        
+        <position height="0" width="0" x="-56" y="-373"/>      
+      </attribute>      
+      <multiplicity id="35" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-56" y="-373"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="36">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="37">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="38" name="state">        
+        <position height="0" width="0" x="-186" y="-111"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-186" y="-111"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="41" name="listener">        
+        <position height="0" width="0" x="7" y="-116"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="1">        
+        <position height="0" width="0" x="7" y="-116"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="44" name="snapshots">        
+        <position height="0" width="0" x="-95" y="-89"/>      
+      </attribute>      
+      <multiplicity id="45" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="-95" y="-89"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="46">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="8"/>  
+  </realization>  
+  <nesting id="47">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <association id="48">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="49" name="delegate">        
+        <position height="0" width="0" x="-220" y="-160"/>      
+      </attribute>      
+      <multiplicity id="50" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-220" y="-160"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="51">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="52" name="auction">        
+        <position height="0" width="0" x="-59" y="-136"/>      
+      </attribute>      
+      <multiplicity id="53" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-59" y="-136"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="54">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <association id="55">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="56" name="sniperListener">        
+        <position height="0" width="0" x="-220" y="-160"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-220" y="-160"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
