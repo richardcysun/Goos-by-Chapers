@@ -7,7 +7,6 @@ import org.jivesoftware.smack.XMPPException;
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionMessageTranslator;
-import auctionsniper.AuctionEventListener.PriceSource;
 import auctionsniper.util.Announcer;
 
 import static auctionsniper.xmpp.XMPPAuctionHouse.AUCTION_ID_FORMAT;
@@ -23,10 +22,10 @@ public class XMPPAuction implements Auction{
 	
 	//Ch19, p.220 revised
 	public XMPPAuction(XMPPConnection connection, String itemId, XMPPFailureReporter failureReporter) {
+		this.failureReporter = failureReporter;
 		AuctionMessageTranslator translator = translatorFor(connection);
 		
 		this.chat = connection.getChatManager().createChat(auctionId(itemId, connection), translator);
-		this.failureReporter = failureReporter;
 		addAuctionEventListener(chatDissconectorFor(translator));
 	}
 	

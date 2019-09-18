@@ -1,7 +1,9 @@
 package auctionsniper.xmpp;
 
+import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import org.apache.commons.io.FilenameUtils;
 import org.jivesoftware.smack.XMPPConnection;
@@ -14,6 +16,7 @@ import auctionsniper.AuctionHouse;
 //"Implementing XMPPAuctionHouse is straightforward..."
 public class XMPPAuctionHouse implements AuctionHouse{
 	private static final String LOGGER_NAME = "auction-sniper";
+	public static final String LOG_FILE_NAME = "auction-sniper.log";
 	public static final String AUCTION_RESOURCE = "Auction";
 	public static final String ITEM_ID_AS_LOGIN = "auction-%s";
 	public static final String AUCTION_ID_FORMAT = ITEM_ID_AS_LOGIN + "@%s/" + AUCTION_RESOURCE;
@@ -38,7 +41,9 @@ public class XMPPAuctionHouse implements AuctionHouse{
 
 	private Handler simpleFileHandler() throws XMPPAuctionException {
 		try {
-			return null;
+			FileHandler handler = new FileHandler(LOG_FILE_NAME);
+			handler.setFormatter(new SimpleFormatter());
+			return handler;
 		}
 		catch (Exception exception) {
 			throw new XMPPAuctionException("could not create logger FileHandler " + FilenameUtils.getFullPath(LOGGER_NAME), exception);

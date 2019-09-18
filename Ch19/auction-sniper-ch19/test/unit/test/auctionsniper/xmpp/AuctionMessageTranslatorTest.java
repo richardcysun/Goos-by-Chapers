@@ -10,7 +10,7 @@ import org.jmock.integration.junit4.JMock;
 
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionEventListener.PriceSource;
-import auctionsniper.xmpp.LoggingXMPPFailureReporter;
+import auctionsniper.xmpp.XMPPFailureReporter;
 import auctionsniper.AuctionMessageTranslator;
 
 //Ch12, p.114, 115, 116
@@ -20,7 +20,7 @@ public class AuctionMessageTranslatorTest {
     private final Mockery context = new Mockery();
     //AuctionEventListener is an interface, be noticed
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
-    private final LoggingXMPPFailureReporter failureReport = context.mock(LoggingXMPPFailureReporter.class);
+    private final XMPPFailureReporter failureReport = context.mock(XMPPFailureReporter.class);
     private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_ID, listener, failureReport);
     
     public static final Chat UNUSED_CHAT = null;//argument doesn't matter
@@ -111,17 +111,11 @@ public class AuctionMessageTranslatorTest {
     	return message;
     }
     
-    //Ch19, p.218    
+    //Ch19, p.218   
+    //Ch19, not in the book, simply follow the same way as notifiesAuctionFailedWhenBadMessageReceived()
     @Test public void notifiesAuctionFailedWhenEventTypeMissing() {
-        context.checking(new Expectations() {
-            {
-                exactly(1).of(listener).auctionFailed();
-            }
-        });
-        
-        Message message = new Message();
-        message.setBody("SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_ID + ";");
-        
-        translator.processMessage(UNUSED_CHAT, message);
+    	String badMessage = "SOLVersion: 1.1; CurrentPrice: 234; Increment: 5; Bidder: " + SNIPER_ID + ";";
+    	expectFailureWithMessage(badMessage);
+    	translator.processMessage(UNUSED_CHAT, message(badMessage));
     }
 }
