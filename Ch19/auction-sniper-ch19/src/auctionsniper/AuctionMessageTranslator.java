@@ -7,23 +7,29 @@ import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
 import auctionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.xmpp.XMPPFailureReporter;
 
 //Ch12, p.115, 116, 120
 public class AuctionMessageTranslator implements MessageListener {
     private final String sniperId;
     private final AuctionEventListener listener;
+    private final XMPPFailureReporter failureReporter;
     
-    public AuctionMessageTranslator(String sniperId, AuctionEventListener listener) {
+    public AuctionMessageTranslator(String sniperId, AuctionEventListener listener, XMPPFailureReporter reporter) {
     	//the listener is actually the Main
         this.sniperId = sniperId;
         this.listener = listener;
+        this.failureReporter = reporter;
     }
 
     //Ch13, p.135 revise Ch12, p.120 and p.116 
+    //Ch19, p.222 revised
     public void processMessage(Chat chat, Message message) {       
+    	String messageBody = message.getBody();
     	try {
-    		translate(message.getBody());
+    		translate(messageBody);
     	} catch (Exception parseException) {
+    		failureReporter.cannotTranslateMessage(sniperId, messageBody, parseException);
     		listener.auctionFailed();
     	}        
     }

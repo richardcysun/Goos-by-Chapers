@@ -5,7 +5,10 @@ import auctionsniper.SniperState;
 import auctionsniper.ui.MainWindow;
 import auctionsniper.ui.SnipersTableModel;
 
+import static org.hamcrest.Matchers.containsString;
 import static test.endtoend.auctionsniper.FakeAuctionServer.XMPP_HOSTNAME;
+
+import java.io.IOException;
 
 //Ch11, p.90
 public class ApplicationRunner {
@@ -15,6 +18,7 @@ public class ApplicationRunner {
 	public static final String SNIPER_XMPP_ID = "sniper@localhost/Auction";
 
     private AuctionSniperDriver driver;
+    private AuctionLogDriver logDriver = new AuctionLogDriver();
 
     //Drive Main to login OpenFire Chat with "sniper/sniper"
     public void startBiddingIn(final FakeAuctionServer... auctions) {
@@ -29,16 +33,23 @@ public class ApplicationRunner {
     }
 
     //Ch18, not in the book
+    //Ch19, p.221 revised
 	public void startBiddingWithStopPrice(FakeAuctionServer auction, int stopPrice) {
     	startSniper();
-        
+        openBiddingFor(auction, stopPrice);
+	}
+	
+	//Ch19, p.221
+    private void openBiddingFor(FakeAuctionServer auction, int stopPrice) {
    		final String itemId = auction.getItemId();
    		driver.startBiddingFor(itemId, stopPrice);
    		driver.showsSniperStatus(itemId, 0, 0, SnipersTableModel.textFor(SniperState.JOINING));
 	}
-	
-    //Ch16, p.184
+
+	//Ch16, p.184
     private void startSniper(final FakeAuctionServer... auctions) {
+    	//Ch19, p.221
+    	logDriver.clearLog();
         Thread thread = new Thread("Test Application") {
             @Override public void run() {
                 try {
@@ -109,8 +120,8 @@ public class ApplicationRunner {
 		driver.showsSniperStatus(auction.getItemId(), 0, 0, MainWindow.STATUS_FAILED);
 	}
 
-	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {
-		// TODO Auto-generated method stub
-		
+	//Ch19, p.221
+	public void reportsInvalidMessage(FakeAuctionServer auction, String message) throws IOException {
+		logDriver.hasEntry(containsString(message));
 	}
 }

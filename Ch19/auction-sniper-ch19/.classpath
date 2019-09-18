@@ -16,5 +16,7 @@
 	<classpathentry kind="lib" path="lib/develop/junit-dep-4.6.jar"/>
 	<classpathentry kind="lib" path="lib/develop/windowlicker-core-DEV.jar"/>
 	<classpathentry kind="lib" path="lib/develop/windowlicker-swing-DEV.jar"/>
+	<classpathentry kind="lib" path="lib/deploy/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/develop/jmock-legacy-2.6-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

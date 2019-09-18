@@ -10,6 +10,7 @@ import org.jmock.integration.junit4.JMock;
 
 import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionEventListener.PriceSource;
+import auctionsniper.xmpp.LoggingXMPPFailureReporter;
 import auctionsniper.AuctionMessageTranslator;
 
 //Ch12, p.114, 115, 116
@@ -19,7 +20,8 @@ public class AuctionMessageTranslatorTest {
     private final Mockery context = new Mockery();
     //AuctionEventListener is an interface, be noticed
     private final AuctionEventListener listener = context.mock(AuctionEventListener.class);
-    private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_ID, listener);
+    private final LoggingXMPPFailureReporter failureReport = context.mock(LoggingXMPPFailureReporter.class);
+    private final AuctionMessageTranslator translator = new AuctionMessageTranslator(SNIPER_ID, listener, failureReport);
     
     public static final Chat UNUSED_CHAT = null;//argument doesn't matter
     
@@ -85,17 +87,28 @@ public class AuctionMessageTranslatorTest {
     }    
     
     //Ch19, p.217
+    //Ch19, p.222 revised
     @Test public void notifiesAuctionFailedWhenBadMessageReceived() {
+    	String badMessage = "a bad message";
+    	expectFailureWithMessage(badMessage);
+    	translator.processMessage(UNUSED_CHAT, message(badMessage));
+    }
+    
+    private void expectFailureWithMessage(String badMessage) {
         context.checking(new Expectations() {
             {
-                exactly(1).of(listener).auctionFailed();
+                oneOf(listener).auctionFailed();
+                oneOf(failureReport).cannotTranslateMessage(
+                		with(SNIPER_ID), with(badMessage), with(any(Exception.class)));
             }
         });
-        
-        Message message = new Message();
-        message.setBody("a bad message");        
-        
-        translator.processMessage(UNUSED_CHAT, message);        
+	}
+
+	//Ch19, p.222
+    private Message message(String body) {
+    	Message message = new Message();
+    	message.setBody(body);
+    	return message;
     }
     
     //Ch19, p.218    
