@@ -119,10 +119,10 @@ public class AuctionSniperEndToEndTest {
     	
     	auction.reportPrice(1197, 10, "third party");			//Step 7
     	application.hasShownSniperIsLosing(auction, 1197, 1098);//Step 8
-    	
+    	holdOn();
     	auction.reportPrice(1207, 10, "forth party");			//Step 9
     	application.hasShownSniperIsLosing(auction, 1207, 1098);//Step 10
-    	
+    	holdOn();
     	auction.announceClosed();              					//Step 11
         holdOn();
         application.showsSniperHasLostAuction(auction, 1207, 1098); //Step 12
@@ -130,6 +130,7 @@ public class AuctionSniperEndToEndTest {
     
     @After public void stopAuction() {
         auction.stop();
+        auction2.stop();
     }
     
     @After public void stopApplication() {
