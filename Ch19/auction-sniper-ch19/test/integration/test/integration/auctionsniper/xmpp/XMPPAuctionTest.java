@@ -63,6 +63,10 @@ public class XMPPAuctionTest {
 			public void auctionClosed() {
 				auctionWasClosed.countDown();
 			}
+			//Ch19, not in the book
+			public void auctionFailed() {
+				//not implemented
+			}			
 			public void currentPrice(int price, int increment, PriceSource proceSource) {
 				//not implemented
 			}

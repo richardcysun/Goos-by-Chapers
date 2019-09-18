@@ -26,6 +26,12 @@ public class AuctionSniper implements AuctionEventListener{
         notifyChange();
     }
     
+    //Ch19, p.219, the source codes in book is wrong
+    public void auctionFailed() {
+    	snapshot = snapshot.failed();
+    	notifyChange();
+    }
+    
     //Ch14, p.143, revise in p.147
     //Ch15, revised in p.163, 164
     public void currentPrice(int price, int increment, PriceSource priceSource) {

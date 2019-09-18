@@ -27,6 +27,7 @@ import static auctionsniper.SniperState.WINNING;
 import static auctionsniper.SniperState.LOSING;
 import static auctionsniper.SniperState.LOST;
 import static auctionsniper.SniperState.WON;
+import static auctionsniper.SniperState.FAILED;
 
 //Ch13, p.124
 @RunWith(JMock.class)
@@ -194,4 +195,31 @@ public class AuctionSniperTest {
     		}
     	});
     }
+    
+    //Ch19, p.218
+    @Test public void reportsFailedIfAuctionFailsWhenBidding() {
+    	ignoringAuction();
+    	allowingSniperBidding();
+    	
+    	expectSniperToFailWhenItIs("bidding");
+    	
+    	sniper.currentPrice(123, 45, PriceSource.FromOtherBidder);
+    	sniper.auctionFailed();
+    }    
+    
+    private void expectSniperToFailWhenItIs(final String state) {
+    	context.checking(new Expectations() {
+    		{
+    			atLeast(1).of(sniperListener).sniperStateChanged(new SniperSnapshot(ITEM_ID, 0, 0, FAILED));
+					when(sniperState.is(state));
+    		}
+    	});		
+	}
+
+	//Ch19, not in the book 
+    private void ignoringAuction() {
+        context.checking(new Expectations() {{ 
+          ignoring(auction);
+        }});
+      }
 }

@@ -11,4 +11,7 @@ public interface AuctionEventListener extends EventListener {
     void auctionClosed();
     //Ch14, p.143, add parameter PriceSource
     void currentPrice(int price, int increment, PriceSource priceSource);
+    
+    //Ch19, not in the book 
+    void auctionFailed();
 }

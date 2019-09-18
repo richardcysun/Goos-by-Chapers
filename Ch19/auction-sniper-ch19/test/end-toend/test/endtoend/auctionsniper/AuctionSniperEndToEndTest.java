@@ -119,17 +119,49 @@ public class AuctionSniperEndToEndTest {
     	
     	auction.reportPrice(1197, 10, "third party");			//Step 7
     	application.hasShownSniperIsLosing(auction, 1197, 1098);//Step 8
-    	
+    	holdOn();
     	auction.reportPrice(1207, 10, "forth party");			//Step 9
     	application.hasShownSniperIsLosing(auction, 1207, 1098);//Step 10
-    	
+    	holdOn();
     	auction.announceClosed();              					//Step 11
         holdOn();
         application.showsSniperHasLostAuction(auction, 1207, 1098); //Step 12
     }
+
+    //Ch19, p.216
+    @Test public void sniperReportsInvalidAuctionMessageAndStopsRespondingToEvents() throws Exception {
+    	String brokenMessage = "a broken message";
+        auction.startSellingItem();                 	//Step 1
+        auction2.startSellingItem();             		//Step 2
+        
+        application.startBiddingIn(auction, auction2);	//Step 3
+        holdOn();
+        auction.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);	//Step 4        
+        auction.reportPrice(500, 20, "other bidder");	//Step 5
+        holdOn();
+        auction.hasReceivedBid(520, ApplicationRunner.SNIPER_XMPP_ID); //Step 6
+        holdOn();
+        auction.sendInvalidMessageContaining(brokenMessage);	//Step 7
+        application.showsSniperHasFailed(auction);		//Step 8
+        holdOn();
+        auction.reportPrice(520, 21, "other bidder");	//Step 9
+        waitForAnotherAuctionEvent();					//Step 10
+        holdOn();
+        application.reportsInvalidMessage(auction, brokenMessage);	//Step 11
+        application.showsSniperHasFailed(auction);		//Step 12
+        auction2.announceClosed();
+    }
     
-    @After public void stopAuction() {
+    //Ch19, p.216
+    private void waitForAnotherAuctionEvent() throws Exception{
+    	auction2.hasReceivedJoinRequestFrom(ApplicationRunner.SNIPER_XMPP_ID);
+    	auction2.reportPrice(600, 6, "other bidder");
+    	application.hasShownSniperIsBidding(auction2, 600, 606);
+	}
+
+	@After public void stopAuction() {
         auction.stop();
+        auction2.stop();
     }
     
     @After public void stopApplication() {

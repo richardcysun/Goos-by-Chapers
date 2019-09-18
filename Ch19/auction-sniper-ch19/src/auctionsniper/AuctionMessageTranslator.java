@@ -20,12 +20,17 @@ public class AuctionMessageTranslator implements MessageListener {
     }
 
     //Ch13, p.135 revise Ch12, p.120 and p.116 
-    public void processMessage(Chat chat, Message message) {
-    	//listener.auctionClosed() was added in P.116, but it broke the test of notifiesBidDetailWhenCurrentPriceMessageReceived(), 
-    	//so it was commented out and replaced with correct uses 
-        //listener.auctionClosed();
-        //HashMap<String, String> event = unpackEventFrom(message);
-        AuctionEvent event = AuctionEvent.from(message.getBody());
+    public void processMessage(Chat chat, Message message) {       
+    	try {
+    		translate(message.getBody());
+    	} catch (Exception parseException) {
+    		listener.auctionFailed();
+    	}        
+    }
+    
+    //Ch19, not in the book
+    private void translate(String body) throws Exception{
+        AuctionEvent event = AuctionEvent.from(body);
         
         String eventType = event.type();
         if ("CLOSE".equals(eventType) ) {
@@ -35,30 +40,39 @@ public class AuctionMessageTranslator implements MessageListener {
         	//It causes Main to display "Bidding"
             listener.currentPrice(event.currentPrice(), event.increment(), event.isFrom(sniperId));
         }
-    }
-    
-    //Nested Class
+	}
+
+	//Nested Class
     //Ch13, p.135
     private static class AuctionEvent {
         private final HashMap<String, String> fields = new HashMap<String, String>();
         
-        private String get(String fieldName) {
-            return fields.get(fieldName);
+        //Ch19, p.218
+        private String get(String fieldName) throws MissingValueException {
+        	String value = fields.get(fieldName);
+        	if (null == value) {
+        		throw new MissingValueException(fieldName);
+        	}
+            return value;
         }
         
-        private int getInt(String fieldName) {
+        //Ch19, add exception, not in the book
+        private int getInt(String fieldName) throws MissingValueException{
             return Integer.parseInt(get(fieldName));
         }
         
-        public String type() {
+        //Ch19, add exception, not in the book
+        public String type() throws MissingValueException {
             return get("Event");
         }
         
-        public int currentPrice() {
+        //Ch19, add exception, not in the book
+        public int currentPrice() throws MissingValueException {
             return getInt("CurrentPrice");
         }
         
-        public int increment() {
+        //Ch19, add exception, not in the book
+        public int increment() throws MissingValueException {
             return getInt("Increment");
         }
         
@@ -80,12 +94,21 @@ public class AuctionMessageTranslator implements MessageListener {
         }
         
         //Ch14, p.142
-        public PriceSource isFrom(String sniperId) {
+        //Ch19, add exception, not in the book
+        public PriceSource isFrom(String sniperId) throws MissingValueException {
             return sniperId.equals(bidder()) ? PriceSource.FromSniper: PriceSource.FromOtherBidder;
         }
         
-        private String bidder() {
+        //Ch19, add exception, not in the book
+        private String bidder() throws MissingValueException {
             return get("Bidder");
         }
     }
+    
+    //CH19, not in the book
+    private static class MissingValueException extends Exception {
+        public MissingValueException(String fieldName) {
+          super("Missing value for " + fieldName);
+        }
+      }
 }

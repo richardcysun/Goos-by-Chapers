@@ -103,4 +103,14 @@ public class ApplicationRunner {
     public void showsSniperHasWonAuction(FakeAuctionServer auction, int lastPrice) {
         driver.showsSniperStatus(auction.getItemId(), lastPrice, lastPrice, MainWindow.STATUS_WON);
     }
+
+    //Ch19, not in the book
+	public void showsSniperHasFailed(FakeAuctionServer auction) {
+		driver.showsSniperStatus(auction.getItemId(), 0, 0, MainWindow.STATUS_FAILED);
+	}
+
+	public void reportsInvalidMessage(FakeAuctionServer auction, String brokenMessage) {
+		// TODO Auto-generated method stub
+		
+	}
 }

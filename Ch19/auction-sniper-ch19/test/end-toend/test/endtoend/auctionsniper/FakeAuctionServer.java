@@ -87,4 +87,9 @@ public class FakeAuctionServer {
 		receiveAMessageMatching(sniperId, equalTo(String.format(XMPPAuction.BID_COMMAND_FORMAT, bid)));
 	}
 
+	//Ch19, not in the book
+	public void sendInvalidMessageContaining(String brokenMessage) throws XMPPException {
+		currentChat.sendMessage(brokenMessage);
+	}
+
 }
