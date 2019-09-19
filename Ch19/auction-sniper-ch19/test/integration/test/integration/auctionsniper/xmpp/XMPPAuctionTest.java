@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionEventListener;
+import auctionsniper.Item;
 import auctionsniper.xmpp.XMPPAuctionException;
 import auctionsniper.xmpp.XMPPAuctionHouse;
 import test.endtoend.auctionsniper.ApplicationRunner;
@@ -47,7 +48,7 @@ public class XMPPAuctionTest {
 	@Test public void receivesEventsFromAuctionServerAfterJoining() throws Exception {
 		CountDownLatch auctionWasClosed = new CountDownLatch(1);
 		
-		Auction auction = auctionHouse.auctionFor(auctionServer.getItemId());
+		Auction auction = auctionHouse.auctionFor(new Item(auctionServer.getItemId(), 567));
 		auction.addAuctionEventListener(auctionClosedListener(auctionWasClosed));
 		
 		auction.join();

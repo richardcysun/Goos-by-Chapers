@@ -11,6 +11,7 @@ import org.jivesoftware.smack.XMPPException;
 
 import auctionsniper.Auction;
 import auctionsniper.AuctionHouse;
+import auctionsniper.Item;
 
 //Entire class are not in the book, it's only mentioned in p.197 and says 
 //"Implementing XMPPAuctionHouse is straightforward..."
@@ -70,8 +71,8 @@ public class XMPPAuctionHouse implements AuctionHouse{
 	}
 	
 	//Ch19, revised, not in the book
-	public Auction auctionFor(String itemId) {
-		return new XMPPAuction(connection, auctionId(itemId, connection), failureReporter);
+	public Auction auctionFor(Item item) {
+		return new XMPPAuction(connection, auctionId(item.identifier, connection), failureReporter);
 	}
 	
 	 private static String auctionId(String itemId, XMPPConnection connection) { 
