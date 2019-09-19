@@ -18,5 +18,7 @@
 	<classpathentry kind="lib" path="lib/develop/windowlicker-swing-DEV.jar"/>
 	<classpathentry kind="lib" path="lib/deploy/commons-io-1.4.jar"/>
 	<classpathentry kind="lib" path="lib/develop/jmock-legacy-2.6-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/develop/cglib-nodep-2.2.jar"/>
+	<classpathentry kind="lib" path="lib/develop/objenesis-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

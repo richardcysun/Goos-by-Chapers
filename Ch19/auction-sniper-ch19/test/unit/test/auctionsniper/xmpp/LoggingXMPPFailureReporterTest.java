@@ -16,8 +16,7 @@ import auctionsniper.xmpp.LoggingXMPPFailureReporter;
 //Ch19, p.223
 @RunWith(JMock.class)
 public class LoggingXMPPFailureReporterTest {
-	private final Mockery context = new Mockery() { {
-		
+	private final Mockery context = new Mockery() {{	
 		setImposteriser(ClassImposteriser.INSTANCE);
 	}};
 	
@@ -28,7 +27,7 @@ public class LoggingXMPPFailureReporterTest {
 		LogManager.getLogManager().reset();
 	}
 	
-	@Test public void writeMessageTranslationFailureToLog() {
+	@Test public void writesMessageTranslationFailureToLog() {
         context.checking(new Expectations() {
             {
                 oneOf(logger).severe("<auction id> "
