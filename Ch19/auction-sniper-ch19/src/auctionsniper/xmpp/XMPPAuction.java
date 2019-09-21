@@ -9,8 +9,6 @@ import auctionsniper.AuctionEventListener;
 import auctionsniper.AuctionMessageTranslator;
 import auctionsniper.util.Announcer;
 
-import static auctionsniper.xmpp.XMPPAuctionHouse.AUCTION_ID_FORMAT;
-
 //Ch17, p.193, most codes are not in the book
 public class XMPPAuction implements Auction{
 	public static final String JOIN_COMMAND_FORMAT = "SOLVersion: 1.1; Command: JOIN;";
@@ -25,7 +23,7 @@ public class XMPPAuction implements Auction{
 		this.failureReporter = failureReporter;
 		AuctionMessageTranslator translator = translatorFor(connection);
 		
-		this.chat = connection.getChatManager().createChat(auctionId(itemId, connection), translator);
+		this.chat = connection.getChatManager().createChat(itemId, translator);
 		addAuctionEventListener(chatDissconectorFor(translator));
 	}
 	
@@ -43,10 +41,6 @@ public class XMPPAuction implements Auction{
 	private AuctionMessageTranslator translatorFor(XMPPConnection connection) {
 		return 	new AuctionMessageTranslator(connection.getUser(), auctionEventListeners.announce(), failureReporter);
 	}
-
-	private static String auctionId(String itemId, XMPPConnection connection) {
-        return String.format(AUCTION_ID_FORMAT, itemId, connection.getServiceName());
-    }
 	
     public void bid(int amount) {
         sendMessage(String.format(BID_COMMAND_FORMAT, amount));
