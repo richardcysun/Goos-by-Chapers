@@ -4,6 +4,12 @@ In the [sf105](https://github.com/sf105/goos-code), it provides a complete work 
 
 Pleaes be noticed that this repository is a kind of personal study note. In addition to original Java codes, some comments are adressed to help me understand what's really happening. Some additional codes are added (and comment-out befoe I commit to Git) to help me observe how this test work in live manner.
 
+### Before you dig in the source codes in this Git repository...
+Please be noticed that the authors don't write every single line of code in the book. From Chapter 11 to 15, maybe 95% of codes are mentioned in the book, and it's not difficult to fill in the missing pieces by myself. However, since Chapter 16, it seems authors are expecting reader to be getting skillful to AuctionSniper. Sometimes, authors only mention what parts need to be done, but they don't write down exact codes in the book. 
+
+Therefore, I have to fill in the gaps either by myself or finding from [sf105](https://github.com/sf105/goos-code).
+Please alse be reminded that source codes in this Git repository is mostly handcraft, and the final work of Chapter 19 is quite different from [sf105](https://github.com/sf105/goos-code).
+
 ## Chapter 11 Passing the First Test
 **TO DO: Single item-join, lose without bidding.**
 
