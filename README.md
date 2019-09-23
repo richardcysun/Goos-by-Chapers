@@ -145,3 +145,4 @@ Once the last price from other bidder is higher than stop price, Auction Sniper 
 "What if it doesn't work?" is the key idea of this chapter. Based on this question mark, authors creates some test cases to drill the failure scenarios. In addtion, since there are failures occur, logging the failures is becoming an inevtible task. To achieve this task, authors plot a failure report to catch and log XMPP failures.
 
 ### Class Diagram of Source Codes
+![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch19/auction-sniper-ch19/src/auctionsniper/Ch19_ClassDiagram.jpg)
