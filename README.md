@@ -4,7 +4,7 @@ In the [sf105](https://github.com/sf105/goos-code), it provides a complete work 
 
 Pleaes be noticed that this repository is a kind of personal study note. In addition to original Java codes, some comments are adressed to help me understand what's really happening. Some additional codes are added (and comment-out befoe I commit to Git) to help me observe how this test work in live manner.
 
-## Chapter 11
+## Chapter 11 Passing the First Test
 **TO DO: Single item-join, lose without bidding.**
 
 In this chapter, authors simply create a walking skeleton. Unexpectedly, the efforts of building up a skeleton is larger than initial expectations. The production codes of walking skeleton only has two classes, the **Main** (very initial business logics) and **MainWindow** (very rough GUI). Inside **Main**, a very simple implementation for interface **MessageListener** handles (listens to) messages from **FakeAuctionServer**.
@@ -14,7 +14,7 @@ While **Main** receiving a message (empty or not, no matter) from **Chat**, it a
 ### Class Diagram of End-to-End Test
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch11/auction-sniper-ch11/test/end-to-end/test/endtoend/auctionsniper/Ch11_e2eTest_ClassDiagram.jpg)
 
-## Chapter 12
+## Chapter 12 Getting Ready to Bid
 **TO DO: Single item-join, bid & lose. (part I)**
 
 This chapter is going to make the walking skeleton more formal. In Chapter 11, the implementation of interface **MessageListener** is enriched and handled by class **AuctionMessageTranslator**.
@@ -38,7 +38,7 @@ public static final String BID_COMMAND_FORMAT = "SOLVersion: 1.1; Command: BID; 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch12/auction-sniper-ch12/src/auctionsniper/Ch12_ClassDiagram.jpg)
 
-## Chapter 13
+## Chapter 13 The Sniper Makes a Bid
 **TO DO: Single item-join, bid & lose. (part II)**
 
 Compared to Chapter 12, ther are some highlights.
@@ -52,7 +52,7 @@ In the term of unit test, the **AuctionSniperTest** tests **AuctionSniper** with
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch13/auction-sniper-ch13/src/auctionsniper/Ch13_ClassDiagram.jpg)
 
-## Chapter 14
+## Chapter 14 The Sniper Wins the Auction
 **TO DO: Single item-join, bid & win.**
 
 In this chapter, the auction sniper wins for the very first time.
@@ -94,7 +94,7 @@ public interface SniperListener extends EventListener {
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch14/auction-sniper-ch14/src/auctionsniper/Ch14_ClassDiagram.jpg)
 
-## Chapter 15
+## Chapter 15 Towards a Real User Interface
 **TO DO: Single item-show price details.**
 
 In this chapter, JLabel is replaced by JTable for better data visibility.
@@ -105,7 +105,7 @@ In previous chapter, bidding data are passing in plaintext-style parameters. But
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch15/auction-sniper-ch15/src/auctionsniper/Ch15_ClassDiagram.jpg)
 
-## Chapter 16
+## Chapter 16 Sniping for Multiple Items
 **TO DO: Multiple Items.**
 
 This chapter is getting quite nasty because authors only demonstrate primary implementations. For those related or surrounding codes, I have to dig them out from [sf105](https://github.com/sf105/goos-code), such as class Announcer.
@@ -117,7 +117,7 @@ Overall, the core of this chapter is create better user experieces and start up 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch16/auction-sniper-ch16/src/auctionsniper/Ch16_ClassDiagram.jpg)
 
-## Chapter 17
+## Chapter 17 Testing Apart Main
 **TO DO: Add new items through the GUI.**
 
 For the perspective of code development, this chapter is very difficult because most codes are not in the book. Readers must fill in the gap on their own, [sf105](https://github.com/sf105/goos-code) is a good reference, but readers still have to tweak them because sf105 is the final work of this book.
@@ -129,12 +129,19 @@ Authors call above improvement as "incremental Architecture" by "Three-Point Con
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch17/auction-sniper-ch17/src/auctionsniper/Ch17_ClassDiagram.jpg)
 
-## Chapter 18
+## Chapter 18 Filling in Details
 **TO DO: Stop bidding at stop price.**
 
-In case the bidding price raising unlimitedly, a stop price is introduced in this chapter.
+In case the bidding price raising unlimitedly (or you can say in case of bankruptcy), a stop price is introduced in this chapter.
 In previous chapters, item identifiers are kept in a String. In this chapter, class Item holds both identifier and stop price.
 Once the last price from other bidder is higher than stop price, Auction Sniper judges this auction has lost.
 
 ### Class Diagram of Source Codes
 ![image](https://github.com/richardcysun/Goos-by-Chapers/blob/master/Ch18/auction-sniper-ch18/src/auctionsniper/Ch18_ClassDiagram.jpg)
+
+## Chapter 19 Handling Failure
+**TO DO: Translator - invalid message from Auction.**
+
+"What if it doesn't work?" is the key idea of this chapter. Based on this question mark, authors creates some test cases to drill the failure scenarios. In addtion, since there are failures occur, logging the failures is becoming an inevtible task. To achieve this task, authors plot a failure report to catch and log XMPP failures.
+
+### Class Diagram of Source Codes
